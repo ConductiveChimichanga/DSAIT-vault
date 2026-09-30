@@ -3,7 +3,9 @@ tags: [MDL, exam, index]
 ---
 # Machine and Deep Learning (DSAIT4005) exam prep
 
-Start here. Each lecture note has the same layout: **big picture, definitions, formulas, intuition, likely exam questions, book sections**.
+New to the material? Read [[MDL Course walkthrough]] first: the whole course as one story.
+
+Each lecture note has the same layout: **big picture, definitions, formulas, intuition, likely exam questions, book sections**.
 
 ## Notes by week
 
