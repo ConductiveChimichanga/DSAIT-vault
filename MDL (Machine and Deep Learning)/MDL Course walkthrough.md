@@ -5,6 +5,10 @@ tags: [MDL, exam, overview]
 
 [[00 MDL Index|↑ Index]] · [[MDL Concepts|Concept map]] · [[MDL Formula sheet|Formulas]] · [[MDL Practice questions|Practice]]
 
+![[MDL course map.excalidraw|900]]
+
+*Open the drawing to click through to each lecture.*
+
 Read this first. It tells the course as one story, in the order it was taught, and explains why each topic exists. Every lecture has a full note with formulas; this page is the thread that connects them.
 
 ## The whole course in one paragraph
