@@ -3,7 +3,7 @@ tags: [MDL, concept, index]
 ---
 # MDL concept map
 
-Back to [[00 MDL Index]]. One note per definition; open the graph view filtered on `path:"MDL Exam"` to see how they connect.
+Back to [[00 MDL Index]]. One note per definition; open the graph view filtered on `path:"MDL (Machine and Deep Learning)"` to see how they connect.
 
 ## [[ML 01 Bayes decision theory]]
 [[Feature vector]] · [[Class prior]] · [[Class-conditional density]] · [[Posterior probability]] · [[Bayes' theorem]] · [[Bayes classifier]] · [[Decision boundary]] · [[Bayes error]] · [[Misclassification cost]] · [[Conditional risk]]
