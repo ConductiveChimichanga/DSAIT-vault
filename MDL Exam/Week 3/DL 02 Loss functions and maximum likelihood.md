@@ -7,7 +7,7 @@ Back to [[00 MDL Index]] · previous [[DL 01 Feed-forward networks and SGD]] · 
 Slides: `MDL03b.1.loss` (Jan van Gemert, after Roger Grosse) · Lab: Assignment 3 · Handout: MDL-Loss-RGrosse.pdf on Brightspace
 
 ## Big picture
-Where do loss functions come from? From **maximum likelihood**. Choosing the output unit (linear, sigmoid, softmax) fixes the probability distribution the network predicts, and the negative log-likelihood of that distribution *is* the loss.
+Where do loss functions come from? From **[[Maximum likelihood estimation|maximum likelihood]]**. Choosing the output unit (linear, [[Sigmoid|sigmoid]], [[Softmax|softmax]]) fixes the probability distribution the network predicts, and the negative log-likelihood of that distribution *is* the loss.
 
 ```mermaid
 flowchart LR
@@ -31,7 +31,7 @@ $$D_{KL}(\hat p_{\text{data}}\,\Vert\,p_{\text{model}})=\mathbb E_{x\sim\hat p_{
 The first term does not depend on $\theta$. Dropping it leaves $\arg\min_\theta-\mathbb E_{x\sim\hat p_{\text{data}}}\log p_{\text{model}}(x;\theta)$, which is MLE.
 
 $$H(p_{\text{data}},p_{\text{model}})=H(p_{\text{data}})+D_{KL}(p_{\text{data}}\Vert p_{\text{model}})$$
-The entropy $H(p_{\text{data}})$ is a constant for the model, so minimising cross-entropy = minimising KL. "Cross-entropy" is a generic term, not only for classification.
+The entropy $H(p_{\text{data}})$ is a constant for the model, so minimising [[Cross-entropy|cross-entropy]] = minimising [[KL divergence|KL]]. "Cross-entropy" is a generic term, not only for classification.
 
 **Conditional version** (classification: predict $y$ from $x$):
 $$\theta_{ML}=\arg\max_\theta\sum_{i=1}^m\log P(y^{(i)}\mid x^{(i)};\theta)$$
@@ -39,14 +39,14 @@ $$\theta_{ML}=\arg\max_\theta\sum_{i=1}^m\log P(y^{(i)}\mid x^{(i)};\theta)$$
 ## Binary classification
 One number $y=P(Y=1\mid x)$ is enough (Bernoulli): $P(Y=0\mid x)=1-y$.
 
-**Attempt 1: clipped linear unit** $y=\max\{0,\min\{1,w^Th+b\}\}$. Outside $[0,1]$ the gradient is zero, so gradient descent cannot fix those points.
+**Attempt 1: clipped linear unit** $y=\max\{0,\min\{1,w^Th+b\}\}$. Outside $[0,1]$ the gradient is zero, so [[Gradient descent|gradient descent]] cannot fix those points.
 
-**Attempt 2: sigmoid + squared error.**
+**Attempt 2: sigmoid + [[Squared error loss|squared error]].**
 $$z=w^Tx+b\ (\text{the logit}),\qquad y=\sigma(z)=\frac1{1+e^{-z}},\qquad L_{SE}=\tfrac12(y-t)^2$$
 $$\frac{dL_{SE}}{dz}=(y-t)\,\sigma'(z),\qquad\sigma'(z)=\sigma(z)(1-\sigma(z))$$
 Problem: for a confidently **wrong** prediction $\sigma'(z)\approx0$, so the step is tiny exactly when it should be large. (Separately, squared error on a raw linear output punishes being "too correct": for $t=1$, $y=10$ costs more than $y=0$.)
 
-**Attempt 3: sigmoid + cross-entropy = logistic regression.**
+**Attempt 3: sigmoid + cross-entropy = [[Logistic regression|logistic regression]].**
 $$L_{CE}(y,t)=-t\log y-(1-t)\log(1-y)=\begin{cases}-\log y&t=1\\-\log(1-y)&t=0\end{cases}$$
 $$\frac{dL_{CE}}{dz}=y-t$$
 The $\sigma'$ cancels. The gradient is large when the prediction is very wrong, and the loss grows linearly in $|z|$ there.
@@ -54,7 +54,7 @@ The $\sigma'$ cancels. The gradient is large when the prediction is very wrong, 
 ![[loss_se_vs_ce.png]]
 
 ## Multiclass classification
-Targets as **one-hot** vectors $t=(0,\dots,0,1,0,\dots,0)$. **Softmax** turns $K$ logits into probabilities:
+Targets as **[[One-hot encoding|one-hot]]** vectors $t=(0,\dots,0,1,0,\dots,0)$. **Softmax** turns $K$ [[Logit|logits]] into probabilities:
 $$y_k=\operatorname{softmax}(z)_k=\frac{e^{z_k}}{\sum_{k'}e^{z_{k'}}}$$
 - outputs are positive and sum to 1
 - if one $z_k$ is much larger than the rest it approximates the arg-max

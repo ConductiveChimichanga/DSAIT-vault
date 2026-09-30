@@ -25,21 +25,21 @@ flowchart TD
 ## Nonlinear features
 Keep the classifier linear in $w$, but feed it nonlinear functions of $x$:
 $$\hat y=w_5x_2^2+w_4x_1^2+w_3x_1x_2+w_2x_2+w_1x_1+w_0$$
-+ still trained with the linear machinery (e.g. least squares). − number of terms explodes with degree and dimension, so overfitting (Assignment 4: degree 20 polynomial has a huge test error). You must guess the right features.
++ still trained with the linear machinery (e.g. [[Least squares|least squares]]). − number of terms explodes with degree and dimension, so [[Overfitting|overfitting]] (Assignment 4: degree 20 polynomial has a huge test error). You must guess the right features.
 
 ## Support vector classifier (preview)
-Linear classifier with a **margin**: the band between $w^Tx+w_0=+1$ and $w^Tx+w_0=-1$. The kernel trick makes it nonlinear. Details in [[ML 06 Complexity and SVM]].
+[[Linear discriminant|Linear classifier]] with a **[[Margin|margin]]**: the band between $w^Tx+w_0=+1$ and $w^Tx+w_0=-1$. The [[Kernel trick|kernel trick]] makes it nonlinear. Details in [[ML 06 Complexity and SVM]].
 
 ## Decision trees
 Each internal node tests **one feature** against a threshold and branches; each leaf outputs a class.
 
-Split to reduce **node impurity**. With $p_i=p(y_i\mid\text{node})$ estimated by counting:
+Split to reduce **[[Impurity|node impurity]]**. With $p_i=p(y_i\mid\text{node})$ estimated by counting:
 $$\text{Entropy: } Q=-\sum_{i=1}^{C}p_i\log p_i\qquad\text{Gini: } Q=\sum_{i=1}^{C}p_i(1-p_i)\qquad\text{or the classification error}$$
 A pure node has $Q=0$; a 50/50 node is the worst. Search all features and thresholds exhaustively and take the split that lowers impurity most.
 
 Stop when: $Q$ stops improving, the node is pure enough, or a maximum depth is reached.
 
-**Decision stump**: a tree with only the root split. Extremely weak, but the only model where the classification error itself can be minimised directly.
+**[[Decision stump]]**: a tree with only the root split. Extremely weak, but the only model where the classification error itself can be minimised directly.
 
 | + | − |
 |---|---|
@@ -48,14 +48,14 @@ Stop when: $Q$ stops improving, the node is pure enough, or a maximum depth is r
 ## Stabilising trees: bagging and random forests
 Averaging identical trees does nothing (same data gives the same tree), so inject randomness.
 
-**Bagging** (bootstrap aggregating), works for any classifier:
+**[[Bagging]]** ([[Bootstrapping|bootstrap]] aggregating), works for any classifier:
 1. Sample $N$ objects **with replacement** from the training set (a bootstrap sample).
 2. Fit a classifier $\hat y_m(x)$.
 3. Repeat $M$ times and average: $\hat y_{\text{bag}}(x)=\dfrac1M\sum_{m=1}^{M}\hat y_m(x)$
 
 If the individual errors were uncorrelated with zero mean, $E_{\text{bag}}=\dfrac1M E_{\text{AV}}$ (PRML p. 656). In practice errors are correlated so the gain is smaller.
 
-**Random forest** = bagged trees + a random subset of features (possibly per node).
+**[[Random forest]]** = bagged trees + a random subset of features (possibly per node).
 
 + reduces variance, always applicable, trains in parallel. − unclear how many to combine; many models to train and store; on very large datasets bootstraps may be too similar.
 
@@ -63,7 +63,7 @@ If the individual errors were uncorrelated with zero mean, $E_{\text{bag}}=\dfra
 Instead of averaging independent models, build a **weighted sum of weak classifiers sequentially**, each one focusing on the mistakes of the previous ones:
 $$\hat y(x)=\operatorname{sign}\Big(\sum_{m=1}^{M}\alpha_m\,\hat y_m(x)\Big)$$
 
-AdaBoost:
+[[AdaBoost]]:
 1. Give every object the same weight.
 2. Train a weak classifier $\hat y_m$ (e.g. a decision stump) on the weighted data.
 3. Compute its weighted error $\varepsilon_m$.
@@ -83,16 +83,16 @@ Reading $\alpha_m$: error 0.5 (chance) gives $\alpha=0$; smaller error gives a b
 | Base learner | unstable/complex (full trees) | weak/simple (stumps) |
 
 ## Combining classifiers
-Feed the outputs (posteriors) of several base classifiers into a combiner.
-- Fixed combiner (average): helps only if the base classifiers are **diverse**. LDA + logistic + perceptron are too similar.
-- Very different classifiers (LDA, QDA, Parzen) averaged: often no better than the best one.
-- **Trained combiner** learns each classifier's strengths. A trained combiner on top of perceptrons is a neural network, trained with backprop: [[DL 03 Backpropagation]].
+Feed the outputs ([[Posterior probability|posteriors]]) of several base classifiers into a combiner.
+- Fixed combiner (average): helps only if the base classifiers are **diverse**. [[LDA]] + logistic + [[Perceptron|perceptron]] are too similar.
+- Very different classifiers (LDA, [[QDA]], [[Parzen density estimate|Parzen]]) averaged: often no better than the best one.
+- **Trained combiner** learns each classifier's strengths. A trained combiner on top of perceptrons is a [[Feed-forward network|neural network]], trained with [[Backpropagation|backprop]]: [[DL 03 Backpropagation]].
 
 ## Likely exam questions
 - Compute entropy or Gini impurity for a node and the gain of a split.
 - Why are trees unstable, and how does a random forest fix it?
 - List the AdaBoost steps; compute $\alpha_m$ for a given error.
-- Bagging vs boosting differences.
+- Bagging vs [[Boosting|boosting]] differences.
 - Why does combining similar classifiers not help?
 - Pros and cons of adding polynomial features.
 

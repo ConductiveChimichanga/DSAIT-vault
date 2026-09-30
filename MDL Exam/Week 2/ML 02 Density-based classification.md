@@ -7,7 +7,7 @@ Back to [[00 MDL Index]] · previous [[ML 01 Bayes decision theory]] · next [[M
 Slides: `week2a_classification` (David Tax)
 
 ## Big picture
-"Plug-in Bayes": estimate $\hat p(x\mid y)$ and $\hat p(y)$ from training data, plug them into Bayes' rule. The only real choice is the **model for the class-conditional density**: a Gaussian (parametric) or a sum of local bumps (non-parametric).
+"[[Plug-in Bayes classifier|Plug-in Bayes]]": estimate $\hat p(x\mid y)$ and $\hat p(y)$ from training data, plug them into [[Bayes' theorem|Bayes' rule]]. The only real choice is the **model for the [[Class-conditional density|class-conditional density]]**: a Gaussian (parametric) or a sum of local bumps (non-parametric).
 
 ```mermaid
 flowchart LR
@@ -22,19 +22,19 @@ flowchart LR
 ```
 
 ## Plug-in estimates
-- Priors: $\hat p(y)=N_y/N$
+- [[Class prior|Priors]]: $\hat p(y)=N_y/N$
 - Unconditional: $\hat p(x)=\sum_i \hat p(x\mid y_i)\hat p(y_i)$
 - Class-conditional: the modelling choice below.
 
 ## Gaussian (parametric) classifiers
 $$p(x\mid y)=\frac{1}{\sqrt{(2\pi)^p\det\Sigma_y}}\exp\!\Big(-\tfrac12(x-\mu_y)^T\Sigma_y^{-1}(x-\mu_y)\Big)$$
 
-Maximum-likelihood estimates:
+[[Maximum likelihood estimation|Maximum-likelihood estimates]]:
 $$\hat\mu=\frac1N\sum_{i=1}^N x_i,\qquad \hat\Sigma=\frac1N\sum_{i=1}^N (x_i-\hat\mu)(x_i-\hat\mu)^T$$
 
 In 2D, $\Sigma=\begin{pmatrix}\sigma_1^2 & \rho\sigma_1\sigma_2\\ \rho\sigma_1\sigma_2 & \sigma_2^2\end{pmatrix}$: diagonal = spread per feature, off-diagonal = tilt of the ellipse.
 
-Discriminant (log posterior without the class-independent terms):
+Discriminant (log [[Posterior probability|posterior]] without the class-independent terms):
 $$g_i(x)=-\tfrac12\log\det\Sigma_i-\tfrac12(x-\mu_i)^T\Sigma_i^{-1}(x-\mu_i)+\log p(y_i)$$
 Assign $x$ to the class with the largest $g_i$. For two classes use $f(x)=g_1(x)-g_2(x)$ and the sign.
 
@@ -49,20 +49,20 @@ Assign $x$ to the class with the largest $g_i$. For two classes use $f(x)=g_1(x)
 
 Why the boundary becomes linear: with a shared $\Sigma$ the quadratic terms $x^T\Sigma^{-1}x$ cancel in $g_1-g_2$.
 
-**Singular covariance.** In the slide example, class +1 has two points that differ in only one feature, so $\hat\Sigma=\begin{pmatrix}0.25&0\\0&0\end{pmatrix}$, one variance is 0 and the inverse does not exist. Rule of thumb: you need more objects than dimensions per class. Fixes: average the covariances (LDA), assume $\sigma^2I$ (nearest mean), or regularise $\Sigma+\lambda I$ (see [[ML 06 Complexity and SVM]]).
+**Singular [[Covariance matrix|covariance]].** In the slide example, class +1 has two points that differ in only one feature, so $\hat\Sigma=\begin{pmatrix}0.25&0\\0&0\end{pmatrix}$, one variance is 0 and the inverse does not exist. Rule of thumb: you need more objects than dimensions per class. Fixes: average the covariances ([[LDA]]), assume $\sigma^2I$ ([[Nearest mean classifier|nearest mean]]), or regularise $\Sigma+\lambda I$ (see [[ML 06 Complexity and SVM]]).
 
 ## Non-parametric density estimates
 Idea: density ≈ (fraction of points) / (volume).
 
-**Histogram**: bins of width $h$, $\hat p(x)=\dfrac{k_N}{N\,h}$ for $x$ in a bin holding $k_N$ points. Too large $h$ = imprecise, too small = unstable. Bin offset matters.
+**[[Histogram density estimate|Histogram]]**: bins of width $h$, $\hat p(x)=\dfrac{k_N}{N\,h}$ for $x$ in a bin holding $k_N$ points. Too large $h$ = imprecise, too small = unstable. Bin offset matters.
 
-**Parzen**: put a kernel of fixed width $h$ on every training point and average:
+**[[Parzen density estimate|Parzen]]**: put a kernel of fixed width $h$ on every training point and average:
 $$\hat p(z\mid h)=\frac1n\sum_{i=1}^n K(\lVert z-x_i\rVert,h)$$
 Parzen classifier: Gaussian kernel per class, $\hat p(x\mid y_i)=\frac1{n_i}\sum_{j}\mathcal N(x\mid x_j^{(i)},hI)$, then Bayes.
 
 ![[parzen_width.png]]
 
-Choosing $h$: leave-one-out likelihood, a heuristic, or the average k-NN distance. Small $h$ overfits.
+Choosing $h$: [[Cross-validation|leave-one-out]] likelihood, a heuristic, or the average [[k-nearest neighbours|k-NN]] distance. Small $h$ [[Overfitting|overfits]].
 
 **k-nearest neighbour**: fix the count $k$, grow a sphere around the test point until it holds $k$ points:
 $$\hat p(x)=\frac{k}{n\,V_k}$$
@@ -70,7 +70,7 @@ For classification with $k_m$ of the $k$ neighbours in class $m$: $\hat p(x\mid 
 
 Choice of $k$: small $k$ = ragged boundary (high variance); large $k$ = smooth (high bias). As $k\to N$ every point gets the largest class, so the error tends to $\min(p(y_1),p(y_2))$. Some optimum in between.
 
-**Scale your features.** Distances are dominated by the feature with the largest range, so Parzen and k-NN give strange results on unscaled data. Gaussian classifiers with a full covariance are not affected in the same way.
+**[[Feature scaling|Scale your features]].** Distances are dominated by the feature with the largest range, so Parzen and k-NN give strange results on unscaled data. Gaussian classifiers with a full covariance are not affected in the same way.
 
 | Pros of non-parametric | Cons |
 |---|---|
@@ -93,12 +93,12 @@ The number of examples needed can grow **exponentially** with the number of feat
 
 ## Likely exam questions
 - Estimate $\hat\mu$ and $\hat\Sigma$ for a 2–4 point class; say whether $\hat\Sigma^{-1}$ exists and why.
-- Which of QDA / LDA / nearest mean gives a linear boundary, and under what assumption? Which needs the most data?
+- Which of [[QDA]] / LDA / nearest mean gives a linear boundary, and under what assumption? Which needs the most data?
 - Show that k-NN density + Bayes gives majority voting.
 - Effect of $h$ or $k$ on smoothness, bias and variance; what happens at $k=1$ and $k=N$.
 - Why must features be scaled for Parzen/k-NN?
-- Explain the curse of dimensionality with the histogram or sphere argument.
-- Advantages and disadvantages of generative vs discriminative.
+- Explain the [[Curse of dimensionality|curse of dimensionality]] with the histogram or sphere argument.
+- Advantages and disadvantages of [[Generative vs discriminative|generative vs discriminative]].
 
 ## Books
 PRML 2.3 (Gaussian; 2.3.4 ML estimates), 4.2 (probabilistic generative models, LDA/QDA), 2.5 (2.5.1 kernel density, 2.5.2 nearest neighbours), 1.4 (curse of dimensionality).

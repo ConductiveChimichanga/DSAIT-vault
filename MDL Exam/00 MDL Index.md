@@ -26,7 +26,7 @@ Week numbers come from the slide file names. Week 4 for the optimisers is inferr
 | 7 | Self-attention and unsupervised learning | not received | |
 | 8 | Foundation models and Q&A | not received | |
 
-Across weeks: [[MDL Formula sheet]] · [[MDL Practice questions]]
+Across weeks: [[MDL Formula sheet]] · [[MDL Practice questions]] · [[MDL Concepts]] (one note per definition, linked from the lecture notes)
 
 ## Flashcards
 Every lecture note ends with a **Flashcards** section for the Spaced Repetition plugin. Open the command palette and run "Spaced Repetition: Review flashcards from all notes"; the decks are grouped as `flashcards/MDL/Week N`.

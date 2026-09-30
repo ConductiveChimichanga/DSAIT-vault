@@ -7,20 +7,20 @@ Back to [[00 MDL Index]] · previous [[ML 05 Evaluation]] · next [[ML 07 Regula
 Slides: `week5a_Complexity` · Lab: Assignment 7
 
 ## Big picture
-**Complexity = flexibility** = the ability to fit any data distribution. Choose it to match the training set size. The number of parameters is a bad measure of it; the VC dimension is a proper one; the SVM is the linear classifier designed to have a small VC dimension, and the kernel trick makes it nonlinear.
+**Complexity = flexibility** = the ability to fit any data distribution. Choose it to match the training set size. The number of parameters is a bad measure of it; the [[VC dimension]] is a proper one; the [[Support vector machine|SVM]] is the [[Linear discriminant|linear classifier]] designed to have a small VC dimension, and the [[Kernel trick|kernel trick]] makes it nonlinear.
 
 ## Complexity and the learning curve
 - More complex classifier: lower training error, higher test error on small sets, lower asymptotic error.
-- Complex is good with enough data; with little data you overtrain. **Choose the complexity according to the available training set size.**
+- Complex is good with enough data; with little data you [[Overfitting|overtrain]]. **Choose the complexity according to the available training set size.**
 
 ## Regularising Gaussian classifiers
-With $N\le p$ objects (per class for QDA) the covariance estimate is singular and the classifier is undefined (the error peaks there; "QDC crashes"). Fix: add artificial noise to the diagonal,
+With $N\le p$ objects (per class for [[QDA]]) the [[Covariance matrix|covariance]] estimate is singular and the classifier is undefined (the error peaks there; "QDC crashes"). Fix: add artificial noise to the diagonal,
 $$\Sigma_i\leftarrow\Sigma_i+\lambda I$$
 - The inverse now exists. Example: $\begin{pmatrix}5&0\\0&0\end{pmatrix}\to\begin{pmatrix}5+\lambda&0\\0&\lambda\end{pmatrix}$.
-- $\lambda\to\infty$ with equal priors gives the **nearest mean classifier**.
-- LDA shows the same peak; there the pseudo-inverse is typically used instead.
+- $\lambda\to\infty$ with equal [[Class prior|priors]] gives the **[[Nearest mean classifier|nearest mean classifier]]**.
+- [[LDA]] shows the same peak; there the pseudo-inverse is typically used instead.
 
-General form of regularisation: minimise training error plus a penalty on flexibility,
+General form of [[Regularisation|regularisation]]: minimise training error plus a penalty on flexibility,
 $$\varepsilon_A(\theta)+\lambda\,\Omega(\theta)$$
 More in [[ML 07 Regularisation]].
 
@@ -30,11 +30,11 @@ More in [[ML 07 Regularisation]].
 
 ## VC dimension
 **VC dimension $h$**: the largest number of points that the classifier can **shatter**, meaning it can realise *every* possible labelling of them (for at least one placement of the points).
-- Linear classifier in $p$ dimensions: $h=p+1$. (A line in 2D shatters 3 points, not 4: XOR.)
+- Linear classifier in $p$ dimensions: $h=p+1$. (A line in 2D shatters 3 points, not 4: [[XOR problem|XOR]].)
 - $\operatorname{sign}(\sin(\omega x))$: $h=\infty$.
 - Known for very few classifiers.
 
-Use: bound the true error from the apparent error. With probability at least $1-\eta$,
+Use: bound the [[True error and apparent error|true error]] from the apparent error. With probability at least $1-\eta$,
 $$\varepsilon\le\varepsilon_A+\frac{E(N)}{2}\Big(1+\sqrt{1+\frac{4\varepsilon_A}{E(N)}}\Big),\qquad E(N)=4\,\frac{h\big(\ln(2N/h)+1\big)-\ln(\eta/4)}{N}$$
 Do not memorise. Know: small $h$ (relative to $N$) → true error close to apparent error. The bound is very loose because it assumes the worst case (random labels); real data is nicely clustered.
 
@@ -42,7 +42,7 @@ Do not memorise. Know: small $h$ (relative to $N$) → true error close to appar
 Assume separable data and constrain the weights so every training point has output at least 1 in magnitude (**canonical hyperplane**):
 $$w^Tx_i+b\ge+1\ \text{ for } y_i=+1,\qquad w^Tx_i+b\le-1\ \text{ for } y_i=-1\qquad\Longleftrightarrow\qquad y_i(w^Tx_i+b)\ge1$$
 
-For such a hyperplane with margin $\rho$ on data inside a sphere of radius $R$:
+For such a hyperplane with [[Margin|margin]] $\rho$ on data inside a sphere of radius $R$:
 $$h\le\min\Big(\Big\lceil\frac{R^2}{\rho^2}\Big\rceil,\ p\Big)+1$$
 So to get a small VC dimension: fewer dimensions, smaller radius, or **larger margin**. The distance from the boundary to each margin plane is $\rho=1/\lVert w\rVert$, so the band is $2/\lVert w\rVert$ wide. Maximising the margin = minimising $\lVert w\rVert$:
 
@@ -56,8 +56,8 @@ $$\max_\alpha\ \sum_i\alpha_i-\tfrac12\sum_{i,j}y_iy_j\alpha_i\alpha_j\,x_i^Tx_j
 $$w=\sum_i\alpha_iy_ix_i,\qquad f(z)=\sum_i\alpha_iy_i\,x_i^Tz+b$$
 - A quadratic programming problem with one unique solution.
 - The solution is written in terms of **objects, not features**.
-- Most $\alpha_i=0$. Objects with $\alpha_i>0$ lie on the margin: the **support vectors**. Removing any other object changes nothing.
-- Leave-one-out bound: $\varepsilon_{\text{LOO}}\le\dfrac{\#\text{support vectors}}{N}$
+- Most $\alpha_i=0$. Objects with $\alpha_i>0$ lie on the margin: the **[[Support vectors|support vectors]]**. Removing any other object changes nothing.
+- [[Cross-validation|Leave-one-out]] bound: $\varepsilon_{\text{LOO}}\le\dfrac{\#\text{support vectors}}{N}$
 - Because it depends on objects, it does well in high-dimensional spaces with few samples.
 
 ### Problem 1: classes overlap → slack variables
@@ -82,7 +82,7 @@ A 3D inner product for the price of a 2D one.
 
 - The kernel implicitly maps to a (usually very) high-dimensional space; RBF to an infinite-dimensional one.
 - Computational cost does not change apart from evaluating $K$.
-- Small $\sigma$ = very flexible (overfits); large $\sigma$ = nearly linear. Same role as the Parzen width $h$.
+- Small $\sigma$ = very flexible (overfits); large $\sigma$ = nearly linear. Same role as the [[Parzen density estimate|Parzen]] width $h$.
 - Special kernels exist for strings, images, invariances.
 
 ### SVM pros and cons

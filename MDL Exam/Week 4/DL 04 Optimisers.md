@@ -7,7 +7,7 @@ Back to [[00 MDL Index]] · previous [[DL 03 Backpropagation]]
 Source: **Assignment 5 only**. I have no lecture slides for the Optimization lecture, so treat this as a core summary and check it against the slides.
 
 ## Big picture
-Plain SGD uses only the current mini-batch gradient. It zig-zags in valleys that are steep in one direction and flat in another, and the gradient is noisy. The three optimisers fix this with **running averages** of past gradients.
+Plain [[Stochastic gradient descent|SGD]] uses only the current mini-batch gradient. It zig-zags in valleys that are steep in one direction and flat in another, and the gradient is noisy. The three optimisers fix this with **running averages** of past gradients.
 
 ![[optimizers.png]]
 
@@ -17,7 +17,7 @@ $$S_t=\rho\,S_{t-1}+(1-\rho)\,y_t$$
 - Larger $\rho$ = smoother but slower to react.
 - Starting from $S_0=0$ biases the first values toward zero. **Bias correction**: $\hat S_t=\dfrac{S_t}{1-\rho^t}$.
 
-In the formulas below $\nabla_\theta$ is the mini-batch gradient, $\epsilon$ the learning rate, $\delta$ a small constant for numerical stability, and squares/roots are element-wise.
+In the formulas below $\nabla_\theta$ is the mini-batch gradient, $\epsilon$ the [[Learning rate|learning rate]], $\delta$ a small constant for numerical stability, and squares/roots are element-wise.
 
 ## SGD with momentum
 Average the **gradient**:
@@ -35,7 +35,7 @@ $$r_i=\rho_2r_{i-1}+(1-\rho_2)\nabla_\theta^2,\qquad\hat r_i=\frac{r_i}{1-\rho_2
 $$\theta'=\theta-\epsilon\,\frac{\hat v_i}{\sqrt{\hat r_i+\delta}}$$
 Typical defaults: $\rho_1=0.9$, $\rho_2=0.999$, $\delta=10^{-8}$.
 
-Useful fact: on the very first step $\hat v_1=\nabla_\theta$ and $\hat r_1=\nabla_\theta^2$, so the step is $\approx\epsilon\cdot\operatorname{sign}(\nabla_\theta)$. Adam's step size is about $\epsilon$ regardless of the gradient's scale.
+Useful fact: on the very first step $\hat v_1=\nabla_\theta$ and $\hat r_1=\nabla_\theta^2$, so the step is $\approx\epsilon\cdot\operatorname{sign}(\nabla_\theta)$. [[Adam]]'s step size is about $\epsilon$ regardless of the gradient's scale.
 
 | | Keeps average of | Effect |
 |---|---|---|
@@ -45,11 +45,11 @@ Useful fact: on the very first step $\hat v_1=\nabla_\theta$ and $\hat r_1=\nabl
 | Adam | both, bias-corrected | both effects, robust default |
 
 > [!note] Other forms you may see
-> The DL book writes momentum as $v\leftarrow\alpha v-\epsilon g$, $\theta\leftarrow\theta+v$ (no $1-\rho$ factor), and puts $\delta$ outside the square root. Same idea, differently scaled. Use the form from the course.
+> The DL book writes [[Momentum|momentum]] as $v\leftarrow\alpha v-\epsilon g$, $\theta\leftarrow\theta+v$ (no $1-\rho$ factor), and puts $\delta$ outside the square root. Same idea, differently scaled. Use the form from the course.
 
 ## Likely exam questions
-- Compute 2–3 EWMA steps by hand, with and without bias correction.
-- One update step of momentum / RMSProp / Adam for given numbers.
+- Compute 2–3 [[Exponentially weighted moving average|EWMA]] steps by hand, with and without bias correction.
+- One update step of momentum / [[RMSProp]] / Adam for given numbers.
 - Why is bias correction needed and when does it stop mattering? ($\rho^t\to0$ after enough steps.)
 - What does each optimiser fix about plain SGD?
 

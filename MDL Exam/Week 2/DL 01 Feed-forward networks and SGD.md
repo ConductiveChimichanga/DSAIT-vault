@@ -7,13 +7,13 @@ Back to [[00 MDL Index]] · previous [[ML 07 Regularisation]] · next [[DL 02 Lo
 Slides: `MDL02.2.feedforward` (Jan van Gemert) · Lab: Assignment 2
 
 ## Big picture
-A feed-forward network (multi-layer perceptron, MLP) approximates a target function $f^*$ by a parameterised chain of simple functions $y=f(x;\theta)$. Training = adjust $\theta$ by gradient descent so that $f$ matches $f^*$ on the data. What makes it "deep learning" is that the **features are learned**, not designed.
+A [[Feed-forward network|feed-forward network]] (multi-layer [[Perceptron|perceptron]], MLP) approximates a target function $f^*$ by a parameterised chain of simple functions $y=f(x;\theta)$. Training = adjust $\theta$ by [[Gradient descent|gradient descent]] so that $f$ matches $f^*$ on the data. What makes it "deep learning" is that the **features are learned**, not designed.
 
 ## Definitions
 - **Layer**: one function in the chain $f(x)=f^{(3)}(f^{(2)}(f^{(1)}(x)))$. First layer is applied to the input; the last is the **output layer**; the ones in between are **hidden layers**. **Depth** = number of layers in the chain.
 - **Parameters $\theta$**: all weights and biases.
-- **Activation function $g$**: element-wise nonlinearity applied after the linear map.
-- **ReLU**: $g(z)=\max\{0,z\}$.
+- **[[Activation function]] $g$**: element-wise nonlinearity applied after the linear map.
+- **[[ReLU]]**: $g(z)=\max\{0,z\}$.
 - **Loss / cost / objective / error function**: the criterion that is minimised.
 
 > [!note] Slide quirk
@@ -44,7 +44,7 @@ If $f_1(x)=W^Tx$ and $f_2(h)=w^Th$ then $f(x)=w^TW^Tx$: still one linear map. St
 ![[activations.png]]
 
 ## XOR: the standard example
-Inputs $X=\{(0,0),(0,1),(1,0),(1,1)\}$, labels $Y=\{0,1,1,0\}$. A linear model $x^Tw+b$ cannot fit it; the best it does under squared error is $w=0,\ b=\tfrac12$, i.e. output ½ everywhere.
+Inputs $X=\{(0,0),(0,1),(1,0),(1,1)\}$, labels $Y=\{0,1,1,0\}$. A linear model $x^Tw+b$ cannot fit it; the best it does under [[Squared error loss|squared error]] is $w=0,\ b=\tfrac12$, i.e. output ½ everywhere.
 
 Solution with one hidden ReLU layer:
 $$W=\begin{pmatrix}1&1\\1&1\end{pmatrix},\quad c=\begin{pmatrix}0\\-1\end{pmatrix},\quad w=\begin{pmatrix}1\\-2\end{pmatrix},\quad b=0$$
@@ -74,13 +74,13 @@ while not converged:
 
 Mean squared error: $L(X,y;\theta)=\dfrac1n\sum_{i=1}^n\big(f(x^{(i)};\theta)-y^{(i)}\big)^2$
 
-Update with learning rate $\epsilon$:
+Update with [[Learning rate|learning rate]] $\epsilon$:
 $$\theta^*=\theta-\epsilon\,\nabla_\theta L(X,y;\theta)$$
 
 ## Stochastic gradient descent (SGD)
 Loss and gradient over all $m$ samples:
 $$J(\theta)=\frac1m\sum_{i=1}^mL(x^{(i)},y^{(i)},\theta),\qquad\nabla_\theta J(\theta)=\frac1m\sum_{i=1}^m\nabla_\theta L(x^{(i)},y^{(i)},\theta)$$
-With huge datasets one step would take too long. SGD uses the exact gradient on a small **mini-batch** of $k$ samples as an estimate of the full gradient:
+With huge datasets one step would take too long. [[Stochastic gradient descent|SGD]] uses the exact gradient on a small **mini-batch** of $k$ samples as an estimate of the full gradient:
 $$\theta^*=\theta-\epsilon\,\frac1k\sum_{i=1}^k\nabla_\theta L(x^{(i)},y^{(i)},\theta)$$
 
 Better update rules built on this are in [[DL 04 Optimisers]]; how the gradient itself is computed is in [[DL 03 Backpropagation]].
@@ -89,7 +89,7 @@ Better update rules built on this are in [[DL 04 Optimisers]]; how the gradient 
 - Compute the output of a small ReLU network by hand (the opening slide: answer 1).
 - Count the parameters of a given architecture.
 - Show that two linear layers collapse into one.
-- Verify the XOR solution; explain why a linear model fails; sketch the $h$-space.
+- Verify the [[XOR problem|XOR]] solution; explain why a linear model fails; sketch the $h$-space.
 - Write the GD and SGD update and name every symbol ($X$ data matrix, $y$ ground truth vector, $\theta$ learnable parameters, $\epsilon$ learning rate).
 - Why SGD instead of full-batch gradient descent?
 - The three routes to a nonlinear representation, and which one is deep learning.

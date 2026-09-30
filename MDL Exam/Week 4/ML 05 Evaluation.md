@@ -7,7 +7,7 @@ Back to [[00 MDL Index]] · previous [[ML 04 Nonlinear classifiers]] · next [[M
 Slides: `week4b_evaluation` · Lab: Assignment 6
 
 ## Big picture
-The error on the training set is **not** a good measure of the true error, and a single number is not all we want. This lecture is about estimating performance honestly and reading the curves that diagnose a classifier.
+The error on the training set is **not** a good measure of the [[True error and apparent error|true error]], and a single number is not all we want. This lecture is about estimating performance honestly and reading the curves that diagnose a classifier.
 
 ## What each classifier optimises
 
@@ -18,13 +18,13 @@ The error on the training set is **not** a good measure of the true error, and a
 | Neural network | MSE or maximum likelihood (cross-entropy) |
 | k-NN | nothing explicit |
 
-**Surrogate loss**: the classification error (0-1 loss) cannot be optimised directly (not differentiable), so we optimise a convenient stand-in. The optimum of the surrogate is generally not the optimum of the true error.
+**[[Surrogate loss]]**: the classification error (0-1 loss) cannot be optimised directly (not differentiable), so we optimise a convenient stand-in. The optimum of the surrogate is generally not the optimum of the true error.
 
 ## Definitions
 - **True error** $\varepsilon$: error on the whole (unseen) distribution.
 - **Apparent error** $\varepsilon_A$: error on the training set. Optimistically biased.
-- **Overfitting**: the gap between the two.
-- **Bayes error**: the floor no classifier gets under.
+- **[[Overfitting]]**: the gap between the two.
+- **[[Bayes error]]**: the floor no classifier gets under.
 - **Asymptotic error**: what a given classifier reaches with infinite data (≥ Bayes error).
 
 ## Train/test trade-off
@@ -40,20 +40,20 @@ Sources of variation in a measured error (Assignment 6): which training set you 
 ## Cross-validation
 Split the data in $n$ parts. Train on $n-1$, test on the remaining one, rotate $n$ times, average:
 $$\hat\varepsilon=\frac1n\sum_{i=1}^{n}\hat\varepsilon_i$$
-- **Leave-one-out (LOO)**: $n=N$. Nearly unbiased (trains on $N-1$ objects) but expensive and the estimate has high variance.
+- **[[Cross-validation|Leave-one-out]] (LOO)**: $n=N$. Nearly unbiased (trains on $N-1$ objects) but expensive and the estimate has high variance.
 - **10-fold** is the usual compromise.
 - Fewer folds → each classifier sees less data → pessimistic bias. More folds → less bias, more compute.
-- **Bootstrapping**: resample with replacement to get many train sets.
+- **[[Bootstrapping]]**: resample with replacement to get many train sets.
 
 ## Learning curves and feature curves
 ![[learning_and_feature_curves.png]]
 
-**Learning curve**: error vs training set size, for train and test.
+**[[Learning curve]]**: error vs training set size, for train and test.
 - True error decreases, apparent error increases, they meet at the asymptotic error.
 - A more complex classifier has a lower training error, a **higher** test error on small sets and a **lower** asymptotic error. So the curves of a simple and a complex classifier **cross**: there is no single best classifier.
 - Use it to see the amount of overtraining, whether more data would help, and how classifiers compare.
 
-**Feature curve**: error vs number of features / complexity at fixed training size. Apparent error keeps dropping; true error is U-shaped (curse of dimensionality). For Parzen, the width $h$ plays the role of (inverse) complexity.
+**[[Feature curve]]**: error vs number of features / complexity at fixed training size. Apparent error keeps dropping; true error is U-shaped ([[Curse of dimensionality|curse of dimensionality]]). For [[Parzen density estimate|Parzen]], the width $h$ plays the role of (inverse) complexity.
 
 Rules from the slides: more complex classifiers and larger feature sets need larger training sets; small training sets need simpler classifiers or fewer features.
 
@@ -74,10 +74,10 @@ $$\text{error}=\frac{FP+FN}{N}\qquad\text{accuracy}=1-\text{error}$$
 $$\text{sensitivity}=\text{recall}=\text{TPR}=\frac{TP}{TP+FN}\qquad\text{specificity}=\frac{TN}{TN+FP}$$
 $$\text{precision}=\frac{TP}{TP+FP}\qquad\text{FPR}=1-\text{specificity}=\frac{FP}{FP+TN}$$
 
-In the slide notation: $\varepsilon_A$ = part of class A sent to B, $\eta_A$ = part classified correctly, $p(A)=\eta_A+\varepsilon_A$; recall $=\eta_A/p(A)$, precision $=\eta_A/(\eta_A+\varepsilon_B)$.
+In the slide notation: $\varepsilon_A$ = part of class A sent to B, $\eta_A$ = part classified correctly, $p(A)=\eta_A+\varepsilon_A$; [[Precision and recall|recall]] $=\eta_A/p(A)$, precision $=\eta_A/(\eta_A+\varepsilon_B)$.
 
 ## Reject option
-- **Ambiguity reject**: refuse objects near the boundary (posteriors about equal).
+- **[[Reject option|Ambiguity reject]]**: refuse objects near the boundary ([[Posterior probability|posteriors]] about equal).
 - **Outlier reject**: refuse objects far from all training data (low $p(x)$).
 - **Reject curve**: error $\varepsilon_r$ vs rejected fraction $r$. Rejecting lowers the error but rejection has a cost too.
 - Optimal amount: total cost $c=c_r\,r+c_\varepsilon\,\varepsilon$ is a straight line in the $(r,\varepsilon)$ plane; slide it until it touches the reject curve.
@@ -86,14 +86,14 @@ In the slide notation: $\varepsilon_A$ = part of class A sent to B, $\eta_A$ = p
 ![[roc.png]]
 Sweep the decision threshold $d$ in $S(x)-d=0$ and plot the two class errors against each other (or TPR vs FPR).
 - Each threshold is one **operating point**.
-- Use when priors or misclassification costs are unknown or will change, and to compare classifiers.
-- **AUC**: area under the curve. Perfect = 1.0, random = 0.5. **Insensitive to class priors.**
+- Use when [[Class prior|priors]] or [[Misclassification cost|misclassification costs]] are unknown or will change, and to compare classifiers.
+- **[[ROC curve|AUC]]**: area under the curve. Perfect = 1.0, random = 0.5. **Insensitive to class priors.**
 - Any point on the line between two classifiers' operating points can be realised by randomly using one a fraction $\alpha$ of the time and the other $1-\alpha$.
 
 ## Likely exam questions
 - True or false: "training error is a good estimate of true error" (false) and "a good estimate of the true error is all we are after" (false: cost, per-class errors, reject, ROC matter).
 - Sketch a learning curve for a simple and a complex classifier and explain the crossing.
-- Compute precision, recall, specificity and error from a confusion matrix.
+- Compute precision, recall, specificity and error from a [[Confusion matrix|confusion matrix]].
 - Explain k-fold vs LOO vs hold-out; bias and variance of each estimate.
 - What is a surrogate loss and why is it needed?
 - What does AUC measure and why is it prior-independent?

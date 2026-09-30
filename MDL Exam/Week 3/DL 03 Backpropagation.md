@@ -7,10 +7,10 @@ Back to [[00 MDL Index]] · previous [[DL 02 Loss functions and maximum likeliho
 Slides: `MDL03b.2.backprop` (Jan van Gemert, after Roger Grosse) · Lab: Assignment 3 · Handout: MDL-BackProp-RGrosse.pdf on Brightspace
 
 ## Big picture
-- **Gradient descent** decides how to *use* a gradient to update parameters.
-- **Backpropagation** is the algorithm that *computes* that gradient efficiently.
+- **[[Gradient descent]]** decides how to *use* a gradient to update parameters.
+- **[[Backpropagation]]** is the algorithm that *computes* that gradient efficiently.
 
-Backprop is "just" the chain rule, organised so that every intermediate derivative is computed once and re-used. It is what makes end-to-end training and representation learning possible.
+Backprop is "just" the [[Chain rule|chain rule]], organised so that every intermediate derivative is computed once and re-used. It is what makes end-to-end training and representation learning possible.
 
 | Training step | What happens |
 |---|---|
@@ -39,7 +39,7 @@ $\bar v\equiv\dfrac{dL}{dv}$: the computed derivative of the loss with respect t
 $$\bar y=y-t,\qquad\bar z=\bar y\,\sigma'(z),\qquad\bar w=\bar z\,x,\qquad\bar b=\bar z$$
 
 ## Worked numerical example (from the slides, do this until it is automatic)
-$x=2,\ w=3,\ b=4,\ t=5$, activation $\sigma(z)=\max\{0,z\}$ (so $\sigma'(z)=1$ for $z>0$), learning rate $0.1$.
+$x=2,\ w=3,\ b=4,\ t=5$, activation $\sigma(z)=\max\{0,z\}$ (so $\sigma'(z)=1$ for $z>0$), [[Learning rate|learning rate]] $0.1$.
 
 | Step | Computation | Value |
 |---|---|---|
@@ -59,13 +59,13 @@ The loss went from 12.5 to 3.125.
 ## Computational graph
 - A **node** is a variable (scalar, vector, matrix, tensor).
 - An edge $x\to y$ means $y$ is computed by applying an operation to $x$.
-- **Topological ordering**: a linear order of the nodes such that for every edge $u\to v$, $u$ comes before $v$ (parents before children).
+- **[[Computational graph|Topological ordering]]**: a linear order of the nodes such that for every edge $u\to v$, $u$ comes before $v$ (parents before children).
 
 ## The algorithm
 To compute the gradients of the last node $n_N$ (the loss):
 
 1. Create a topological ordering $n_1,\dots,n_N$ of the graph.
-2. **Forward pass**: for $i=1,\dots,N$ evaluate $n_i$ from its parents.
+2. **[[Forward and backward pass|Forward pass]]**: for $i=1,\dots,N$ evaluate $n_i$ from its parents.
 3. Set $\bar n_N=1$ (the derivative of a node with respect to itself is 1).
 4. **Backward pass**: for $i=N-1,\dots,1$
 $$\bar n_i=\sum_{n_j\in\text{Children}(n_i)}\bar n_j\,\frac{\partial n_j}{\partial n_i}$$
@@ -97,7 +97,7 @@ $$\bar w=\bar z\,x+\bar R\,w\quad(\text{two children: }z\text{ and }R),\qquad\ba
 ## Backward pass of a layer (Assignment 3)
 For a linear layer $y=xW+b$ with upstream gradient $\bar y$ (row-vector convention, batch in rows):
 $$\bar W=x^T\bar y,\qquad\bar b=\textstyle\sum_{\text{batch}}\bar y,\qquad\bar x=\bar y\,W^T$$
-ReLU: $\bar z=\bar y\odot\mathbb 1[z>0]$. Sigmoid: $\bar z=\bar y\odot y(1-y)$.
+[[ReLU]]: $\bar z=\bar y\odot\mathbb 1[z>0]$. [[Sigmoid]]: $\bar z=\bar y\odot y(1-y)$.
 Each layer caches its forward input, because the backward pass needs it.
 
 ## Likely exam questions

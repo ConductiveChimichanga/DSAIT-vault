@@ -7,7 +7,7 @@ Back to [[00 MDL Index]] · previous [[ML 02 Density-based classification]] · n
 Slides: `week3a_LinearClassifiers` (David Tax) · Lab: Assignment 4
 
 ## Big picture
-Density estimation is hard in high dimensions. So skip it: **assume a form for the decision boundary, define a loss, optimise the parameters**. Four linear classifiers share the same model and differ only in the loss.
+Density estimation is hard in high dimensions. So skip it: **assume a form for the [[Decision boundary|decision boundary]], define a loss, optimise the parameters**. Four [[Linear discriminant|linear classifiers]] share the same model and differ only in the loss.
 
 $$g(x)=w^Tx+w_0,\qquad \text{classify } y_1 \text{ if } g(x)\ge 0,\ \ y_2 \text{ otherwise}$$
 
@@ -24,7 +24,7 @@ $$g(x)=w^Tx+w_0,\qquad \text{classify } y_1 \text{ if } g(x)\ge 0,\ \ y_2 \text{
 
 ## Two ways to minimise a cost $J(\theta)$
 1. Set $\partial J/\partial\theta=0$ and solve (usually impossible).
-2. **Gradient descent**: $\theta_{t+1}=\theta_t-\rho\,\dfrac{\partial J}{\partial\theta}$, with learning rate $\rho$.
+2. **[[Gradient descent]]**: $\theta_{t+1}=\theta_t-\rho\,\dfrac{\partial J}{\partial\theta}$, with [[Learning rate|learning rate]] $\rho$.
 
 ## Perceptron
 Labels $y_i\in\{+1,-1\}$. Loss counts only misclassified points, weighted by how wrong they are:
@@ -33,14 +33,14 @@ Gradient step:
 $$w(t+1)=w(t)+\rho_t\sum_{\text{misclassified }x_i}y_i\,x_i$$
 - Separable data: converges to *a* separating line (not a unique or best one).
 - Non-separable data: never stops updating.
-- Can be trained one sample at a time or in batches. It is the ancestor of the neural network.
+- Can be trained one sample at a time or in batches. It is the ancestor of the [[Feed-forward network|neural network]].
 
 ## Fisher linear discriminant
 Project onto a direction $w$ and make the classes as separated as possible relative to their spread:
 $$J_F(w)=\frac{\lvert w^T\mu_A-w^T\mu_B\rvert^2}{w^T\Sigma_Aw+w^T\Sigma_Bw}=\frac{w^T\Sigma_{\text{between}}\,w}{w^T\Sigma_W\,w}$$
 with $\Sigma_{\text{between}}=(\mu_A-\mu_B)(\mu_A-\mu_B)^T$ and $\Sigma_W=\Sigma_A+\Sigma_B$. Setting the derivative to zero:
 $$w=\Sigma_W^{-1}(\mu_A-\mu_B)$$
-Same direction as LDA, reached without assuming Gaussians. Differences: Fisher's $w_0$ is still free to choose; both need $\Sigma_W^{-1}$, so both break with too little data.
+Same direction as [[LDA]], reached without assuming Gaussians. Differences: Fisher's $w_0$ is still free to choose; both need $\Sigma_W^{-1}$, so both break with too little data.
 
 ## Least squares
 Treat classification as regression on labels $\pm1$:
@@ -58,33 +58,33 @@ Model the log-odds as linear:
 $$\ln\frac{p(y_1\mid x)}{p(y_2\mid x)}=\beta_0+\beta^Tx\quad\Rightarrow\quad p(y_1\mid x)=\frac{1}{1+e^{-(\beta_0+\beta^Tx)}},\quad p(y_2\mid x)=\frac{1}{1+e^{\beta_0+\beta^Tx}}$$
 Fit by maximising the log-likelihood with gradient ascent, starting from $\beta=0$:
 $$\beta_{\text{new}}=\beta_{\text{old}}+\eta\,\frac{\partial\ln L}{\partial\beta},\qquad \frac{\partial \ln L}{\partial\beta_j}=\sum_{i\in y_1}(x_i)_j-\sum_{i=1}^{N}p(y_1\mid x_i)\,(x_i)_j$$
-Read the gradient as "(target − prediction) × input", summed over objects. Same thing as [[DL 02 Loss functions and maximum likelihood]] with a sigmoid output and cross-entropy.
+Read the gradient as "(target − prediction) × input", summed over objects. Same thing as [[DL 02 Loss functions and maximum likelihood]] with a [[Sigmoid|sigmoid]] output and [[Cross-entropy|cross-entropy]].
 
 Boundary is linear ($\beta_0+\beta^Tx=0$); $\lVert\beta\rVert$ sets how steep the sigmoid is across it.
 
 ## Bias-variance dilemma
-A classifier depends on the training set $D$ it happened to get: $g(x;D)$. Average the squared error over training sets:
+A classifier depends on the training set $D$ it happened to get: $g(x;D)$. Average the [[Squared error loss|squared error]] over training sets:
 $$E_D\big[(g(x;D)-E[y\mid x])^2\big]=\underbrace{E_D\big[(g(x;D)-E_D[g(x;D)])^2\big]}_{\text{variance}}+\underbrace{\big(E_D[g(x;D)]-E[y\mid x]\big)^2}_{\text{bias}^2}$$
 Derivation trick: add and subtract $E_D[g(x;D)]$, expand the square, the cross term averages to zero.
 - **Variance**: how much the classifier changes between training sets.
 - **Bias**: how far the *average* classifier is from the truth.
-- Simple model (LDA): low variance, high bias. Flexible model (k-NN): high variance, low bias.
+- Simple model (LDA): low variance, high bias. Flexible model ([[k-nearest neighbours|k-NN]]): high variance, low bias.
 - Simple models are stable and need less data; complex models only pay off with enough data.
 
 ![[learning_and_feature_curves.png]]
 
-**Feature curve**: error vs complexity/number of features is U-shaped for the true error. The minimum shifts right as the training set grows.
+**[[Feature curve]]**: error vs complexity/number of features is U-shaped for the [[True error and apparent error|true error]]. The minimum shifts right as the training set grows.
 
 ## Likely exam questions
 - Compute $\hat w=(X^TX)^{-1}X^Ty$ for a tiny dataset, with and without intercept.
-- Do one perceptron update for a given $w$, $\rho$ and misclassified point.
-- Write down the Fisher criterion and its solution; relate it to LDA.
-- Derive the logistic posterior from the linear log-odds assumption.
-- Derive or explain the bias-variance decomposition; label LDA and k-NN on it.
-- Slide "things to think about": do perceptron and least squares depend on class densities? Same complexity? How to make a multi-class perceptron / Fisher? (Answers in [[MDL Practice questions]].)
+- Do one [[Perceptron|perceptron]] update for a given $w$, $\rho$ and misclassified point.
+- Write down the [[Fisher linear discriminant|Fisher criterion]] and its solution; relate it to LDA.
+- Derive the logistic [[Posterior probability|posterior]] from the linear log-odds assumption.
+- Derive or explain the [[Bias-variance tradeoff|bias-variance decomposition]]; label LDA and k-NN on it.
+- Slide "things to think about": do perceptron and [[Least squares|least squares]] depend on class densities? Same complexity? How to make a multi-class perceptron / Fisher? (Answers in [[MDL Practice questions]].)
 
 ## Books
-PRML 4.1 (4.1.1 two classes, 4.1.3 least squares, 4.1.4 Fisher, 4.1.7 perceptron), 4.3.2 (logistic regression), 3.2 (bias-variance), 3.1.1 (least-squares normal equations). DL book 5.4 (bias and variance), 5.7.1.
+PRML 4.1 (4.1.1 two classes, 4.1.3 least squares, 4.1.4 Fisher, 4.1.7 perceptron), 4.3.2 ([[Logistic regression|logistic regression]]), 3.2 (bias-variance), 3.1.1 (least-squares normal equations). DL book 5.4 (bias and variance), 5.7.1.
 
 ## Flashcards
 #flashcards/MDL/Week3
