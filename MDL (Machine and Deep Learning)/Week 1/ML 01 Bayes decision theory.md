@@ -49,6 +49,36 @@ $$p(\text{error})=\sum_{i=1}^{C}p(\text{error}\mid y_i)\,p(y_i),\qquad\varepsilo
 
 ![[bayes_1d.png]]
 
+## Classification error, step by step (slides 40 to 43)
+
+The setting from the slides: two 1D Gaussian classes, drawn already multiplied by their priors, so the curves are $p(x\mid y_1)p(y_1)$ (blue) and $p(x\mid y_2)p(y_2)$ (red). Blue bars and red stars are training objects. The green line is the decision threshold: everything left of it is assigned to $y_1$, everything right of it to $y_2$. My curves are fitted by eye to the slide figure, so the numbers are illustrative, not the lecturer's.
+
+**1. Any threshold makes two kinds of error.**
+$$p(\text{error})=\sum_{i=1}^{C}p(\text{error}\mid y_i)\,p(y_i)=\underbrace{\int_{x\to y_2}p(x\mid y_1)p(y_1)\,dx}_{\text{Prob}(x\in y_1,\ x\to y_2)}+\underbrace{\int_{x\to y_1}p(x\mid y_2)p(y_2)\,dx}_{\text{Prob}(x\in y_2,\ x\to y_1)}$$
+Each yellow area is one term: the part of a class's curve that falls on the wrong side of the line.
+
+![[bayes_error_threshold.png]]
+
+With the threshold at $x=0.6$ the blue tail on the right is large: many class-1 objects are sent to class 2.
+
+**2. The Bayes error is the smallest possible yellow area.**
+Move the line to where the two curves cross. Now at every $x$ you pick the class whose curve is higher, and the yellow area is exactly the area under the *lower* curve:
+$$\varepsilon^*=\int\min\big[p(x\mid y_1)p(y_1),\ p(x\mid y_2)p(y_2)\big]\,dx$$
+
+![[bayes_error_minimum.png]]
+
+The error drops from 0.125 to 0.096, but not to zero: where the curves overlap, some objects of each class look exactly like the other class. That is why the slide says the Bayes error is *typically > 0*.
+
+**3. Why the crossing point is optimal.**
+Take a threshold left of the crossing. Between the threshold and the crossing, the blue curve is above the red one, yet you assign those objects to class 2. You pay the blue height instead of the red height there. The red wedge in the left plot is exactly that extra cost. Moving the threshold to the other side of the crossing creates the mirror-image wedge. So the total error, plotted against the threshold position, has its minimum at the crossing, and that minimum value is $\varepsilon^*$.
+
+![[bayes_error_vs_threshold.png]]
+
+**What changes the picture**
+- A larger prior $p(y_1)$ scales the blue curve up, so the crossing (the Bayes boundary) moves right, into class 2's territory.
+- Wider or closer classes overlap more, so $\varepsilon^*$ grows. No classifier can fix that; only better features can.
+- In practice you never see the true curves, so you cannot compute $\varepsilon^*$. Your classifier's boundary is an estimate of the crossing point, and its error is always at least $\varepsilon^*$.
+
 ## Bayes error: what to know
 - It is the **minimum** error and is typically **> 0** (the classes overlap).
 - It depends on the **distribution of the data**, not on the classifier you use.

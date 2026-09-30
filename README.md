@@ -5,10 +5,10 @@ Obsidian vault with study notes for the TU Delft DSAIT master.
 > [!WARNING]
 > **Disclaimer:** parts of these notes may be AI-generated. They can contain mistakes, so double-check anything important against the lecture slides, the course books or the lecturers before relying on it.
 
-| Folder | Course | Start at |
-|---|---|---|
-| `MDL (Machine and Deep Learning)` | DSAIT4005 Machine and Deep Learning | `00 MDL Index` |
-| `PAIR (Probabilistic AI and Reasoning)` | Probabilistic AI and Reasoning | `00 PAIR Index` |
+| Folder                                  | Course                              | Start at                                                                                                                        |
+| --------------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `MDL (Machine and Deep Learning)`       | DSAIT4005 Machine and Deep Learning | [MDL Course walkthrough](obsidian://open?vault=DSAIT&file=MDL%20(Machine%20and%20Deep%20Learning)%2FMDL%20Course%20walkthrough) |
+| `PAIR (Probabilistic AI and Reasoning)` | Probabilistic AI and Reasoning      | `00 PAIR Index`                                                                                                                 |
 
 Each course folder has the same layout: an index note, lecture notes grouped per week or lecture, a `Concepts` folder with one note per definition, and a `figures` folder.
 
