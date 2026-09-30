@@ -1,10 +1,14 @@
 ---
 tags: [MDL, DL, exam]
+week: 3
+slides: "MDL03b.1.loss"
+lecturer: "Jan van Gemert, after Roger Grosse"
+lab: "Assignment 3"
+handout: "MDL-Loss-RGrosse.pdf (Brightspace)"
 ---
 # DL 02 · Loss functions and maximum likelihood
 
-Back to [[00 MDL Index]] · previous [[DL 01 Feed-forward networks and SGD]] · next [[DL 03 Backpropagation]]
-Slides: `MDL03b.1.loss` (Jan van Gemert, after Roger Grosse) · Lab: Assignment 3 · Handout: MDL-Loss-RGrosse.pdf on Brightspace
+[[DL 01 Feed-forward networks and SGD|← DL 01]] · [[00 MDL Index|↑ Index]] · [[DL 03 Backpropagation|DL 03 →]]
 
 ## Big picture
 Where do loss functions come from? From **[[Maximum likelihood estimation|maximum likelihood]]**. Choosing the output unit (linear, [[Sigmoid|sigmoid]], [[Softmax|softmax]]) fixes the probability distribution the network predicts, and the negative log-likelihood of that distribution *is* the loss.

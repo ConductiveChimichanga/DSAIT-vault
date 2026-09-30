@@ -1,10 +1,12 @@
 ---
 tags: [MDL, ML, exam]
+week: 5
+slides: "week5a_Complexity"
+lab: "Assignment 7"
 ---
 # ML 06 · Complexity and support vector classifiers
 
-Back to [[00 MDL Index]] · previous [[ML 05 Evaluation]] · next [[ML 07 Regularisation]]
-Slides: `week5a_Complexity` · Lab: Assignment 7
+[[ML 05 Evaluation|← ML 05]] · [[00 MDL Index|↑ Index]] · [[ML 07 Regularisation|ML 07 →]]
 
 ## Big picture
 **Complexity = flexibility** = the ability to fit any data distribution. Choose it to match the training set size. The number of parameters is a bad measure of it; the [[VC dimension]] is a proper one; the [[Support vector machine|SVM]] is the [[Linear discriminant|linear classifier]] designed to have a small VC dimension, and the [[Kernel trick|kernel trick]] makes it nonlinear.

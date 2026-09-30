@@ -1,10 +1,13 @@
 ---
 tags: [MDL, ML, exam]
+week: 2
+slides: "week2a_classification"
+lecturer: "David Tax"
+lab: "Assignment 1"
 ---
 # ML 02 · Density-based classification
 
-Back to [[00 MDL Index]] · previous [[ML 01 Bayes decision theory]] · next [[ML 03 Linear classifiers]]
-Slides: `week2a_classification` (David Tax)
+[[ML 01 Bayes decision theory|← ML 01]] · [[00 MDL Index|↑ Index]] · [[ML 03 Linear classifiers|ML 03 →]]
 
 ## Big picture
 "[[Plug-in Bayes classifier|Plug-in Bayes]]": estimate $\hat p(x\mid y)$ and $\hat p(y)$ from training data, plug them into [[Bayes' theorem|Bayes' rule]]. The only real choice is the **model for the [[Class-conditional density|class-conditional density]]**: a Gaussian (parametric) or a sum of local bumps (non-parametric).

@@ -1,10 +1,13 @@
 ---
 tags: [MDL, ML, exam]
+week: 3
+slides: "week3a_LinearClassifiers"
+lecturer: "David Tax"
+lab: "Assignment 4"
 ---
 # ML 03 · Linear classifiers and bias-variance
 
-Back to [[00 MDL Index]] · previous [[ML 02 Density-based classification]] · next [[ML 04 Nonlinear classifiers]]
-Slides: `week3a_LinearClassifiers` (David Tax) · Lab: Assignment 4
+[[ML 02 Density-based classification|← ML 02]] · [[00 MDL Index|↑ Index]] · [[ML 04 Nonlinear classifiers|ML 04 →]]
 
 ## Big picture
 Density estimation is hard in high dimensions. So skip it: **assume a form for the [[Decision boundary|decision boundary]], define a loss, optimise the parameters**. Four [[Linear discriminant|linear classifiers]] share the same model and differ only in the loss.

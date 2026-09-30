@@ -1,10 +1,13 @@
 ---
 tags: [MDL, ML, exam]
+week: 1
+slides: "week1a_introduction"
+lecturer: "Jan van Gemert, David Tax"
+lab: "Assignment 1"
 ---
 # ML 01 · Introduction and Bayes decision theory
 
-Back to [[00 MDL Index]] · next [[ML 02 Density-based classification]]
-Slides: `week1a_introduction` (Jan van Gemert, David Tax) · Lab: Assignment 1
+[[00 MDL Index|↑ Index]] · [[ML 02 Density-based classification|ML 02 →]]
 
 ## Big picture
 Machine learning = **learning from examples**. Classification = predict the label of an object. The best possible classifier is the **[[Bayes classifier]]**: assign the class with the highest [[Posterior probability|posterior]] $p(y\mid x)$. Everything else in the ML half is a way of estimating or side-stepping $p(y\mid x)$. When [[Misclassification cost|misclassification costs]] differ, you only need to **rescale the posteriors**.

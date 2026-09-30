@@ -1,10 +1,13 @@
 ---
 tags: [MDL, ML, DL, exam]
+week: 5
+slides: "week5b_Regularisation"
+lecturer: "David Tax"
+follows: "Deep Learning book, chapter 7"
 ---
 # ML 07 · Regularisation
 
-Back to [[00 MDL Index]] · previous [[ML 06 Complexity and SVM]] · next [[DL 01 Feed-forward networks and SGD]]
-Slides: `week5b_Regularisation` (David Tax), follows DL book chapter 7
+[[ML 06 Complexity and SVM|← ML 06]] · [[00 MDL Index|↑ Index]] · [[DL 01 Feed-forward networks and SGD|DL 01 →]]
 
 ## Big picture
 Modern practice: build a very large flexible model, then use tricks to stop it [[Overfitting|overfitting]]. Those tricks are [[Regularisation|regularisation]].

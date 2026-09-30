@@ -1,10 +1,15 @@
 ---
 tags: [MDL, DL, exam]
+week: 4
+slides: "none received"
+lab: "Assignment 5"
 ---
 # DL 04 · Optimisers: momentum, RMSProp, Adam
 
-Back to [[00 MDL Index]] · previous [[DL 03 Backpropagation]]
-Source: **Assignment 5 only**. I have no lecture slides for the Optimization lecture, so treat this as a core summary and check it against the slides.
+[[DL 03 Backpropagation|← DL 03]] · [[00 MDL Index|↑ Index]]
+
+> [!warning]- Source: Assignment 5 only
+> I have no lecture slides for the Optimization lecture, so treat this as a core summary and check it against the slides.
 
 ## Big picture
 Plain [[Stochastic gradient descent|SGD]] uses only the current mini-batch gradient. It zig-zags in valleys that are steep in one direction and flat in another, and the gradient is noisy. The three optimisers fix this with **running averages** of past gradients.

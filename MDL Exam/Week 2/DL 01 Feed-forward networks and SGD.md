@@ -1,10 +1,13 @@
 ---
 tags: [MDL, DL, exam]
+week: 2
+slides: "MDL02.2.feedforward"
+lecturer: "Jan van Gemert"
+lab: "Assignment 2"
 ---
 # DL 01 · Feed-forward networks and SGD
 
-Back to [[00 MDL Index]] · previous [[ML 07 Regularisation]] · next [[DL 02 Loss functions and maximum likelihood]]
-Slides: `MDL02.2.feedforward` (Jan van Gemert) · Lab: Assignment 2
+[[ML 07 Regularisation|← ML 07]] · [[00 MDL Index|↑ Index]] · [[DL 02 Loss functions and maximum likelihood|DL 02 →]]
 
 ## Big picture
 A [[Feed-forward network|feed-forward network]] (multi-layer [[Perceptron|perceptron]], MLP) approximates a target function $f^*$ by a parameterised chain of simple functions $y=f(x;\theta)$. Training = adjust $\theta$ by [[Gradient descent|gradient descent]] so that $f$ matches $f^*$ on the data. What makes it "deep learning" is that the **features are learned**, not designed.

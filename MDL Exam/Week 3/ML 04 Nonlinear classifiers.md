@@ -1,10 +1,12 @@
 ---
 tags: [MDL, ML, exam]
+week: 3
+slides: "week3a_NonLinearClassifiers"
+lecturer: "David Tax"
 ---
 # ML 04 · Nonlinear classifiers
 
-Back to [[00 MDL Index]] · previous [[ML 03 Linear classifiers]] · next [[ML 05 Evaluation]]
-Slides: `week3a_NonLinearClassifiers` (David Tax)
+[[ML 03 Linear classifiers|← ML 03]] · [[00 MDL Index|↑ Index]] · [[ML 05 Evaluation|ML 05 →]]
 
 ## Big picture
 Most nonlinear classifiers are built by **combining simple (often linear) pieces**. They need enough data; with little data keep the model simple or regularise.

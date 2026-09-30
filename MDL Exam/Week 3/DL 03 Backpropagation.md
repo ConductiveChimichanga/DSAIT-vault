@@ -1,10 +1,14 @@
 ---
 tags: [MDL, DL, exam]
+week: 3
+slides: "MDL03b.2.backprop"
+lecturer: "Jan van Gemert, after Roger Grosse"
+lab: "Assignment 3"
+handout: "MDL-BackProp-RGrosse.pdf (Brightspace)"
 ---
 # DL 03 · Backpropagation
 
-Back to [[00 MDL Index]] · previous [[DL 02 Loss functions and maximum likelihood]] · next [[DL 04 Optimisers]]
-Slides: `MDL03b.2.backprop` (Jan van Gemert, after Roger Grosse) · Lab: Assignment 3 · Handout: MDL-BackProp-RGrosse.pdf on Brightspace
+[[DL 02 Loss functions and maximum likelihood|← DL 02]] · [[00 MDL Index|↑ Index]] · [[DL 04 Optimisers|DL 04 →]]
 
 ## Big picture
 - **[[Gradient descent]]** decides how to *use* a gradient to update parameters.
