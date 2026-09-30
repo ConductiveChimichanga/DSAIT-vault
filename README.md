@@ -2,6 +2,9 @@
 
 Obsidian vault with study notes for the TU Delft DSAIT master.
 
+> [!WARNING]
+> **Disclaimer:** parts of these notes may be AI-generated. They can contain mistakes, so double-check anything important against the lecture slides, the course books or the lecturers before relying on it.
+
 | Folder | Course | Start at |
 |---|---|---|
 | `MDL (Machine and Deep Learning)` | DSAIT4005 Machine and Deep Learning | `00 MDL Index` |
