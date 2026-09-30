@@ -84,3 +84,46 @@ Matching the loss to the output unit always gives the clean gradient "prediction
 
 ## Books
 DL book 5.5 (MLE; 5.5.1 conditional log-likelihood), 3.13 (KL, cross-entropy), 3.10 (sigmoid, softplus), 6.2.2 (output units: 6.2.2.2 sigmoid, 6.2.2.3 softmax), 5.7.1. UDL 5 (loss functions; 5.7 cross-entropy). PRML 1.6 (information theory), 4.3.2, 4.3.4 (multiclass logistic regression).
+
+## Flashcards
+#flashcards/MDL/Week3
+
+Maximum likelihood estimate::$\theta_{ML}=\arg\max_\theta\prod_i p_{model}(x^{(i)};\theta)=\arg\max_\theta\sum_i\log p_{model}(x^{(i)};\theta)$
+
+Which assumption turns the likelihood into a product?::The samples are i.i.d.
+
+Why take the log of the likelihood?::Products of numbers in $[0,1]$ are numerically unstable; the log keeps the arg-max and turns products into sums
+
+KL divergence between data and model::$D_{KL}=\mathbb E_{x\sim\hat p_{data}}[\log\hat p_{data}(x)-\log p_{model}(x;\theta)]$
+
+Why is minimising KL the same as maximum likelihood?::The $\log\hat p_{data}$ term does not depend on $\theta$; what is left is the negative log-likelihood
+
+Relation between cross-entropy and KL::$H(p,q)=H(p)+D_{KL}(p\Vert q)$, and $H(p_{data})$ is a constant for the model
+
+Four equivalent training objectives::Maximise likelihood, minimise negative log-likelihood, minimise KL divergence, minimise cross-entropy
+
+Conditional maximum likelihood for classification::$\theta_{ML}=\arg\max_\theta\sum_i\log P(y^{(i)}\mid x^{(i)};\theta)$
+
+Why is one output enough for binary classification?::$P(Y=0\mid x)=1-P(Y=1\mid x)$ (Bernoulli)
+
+Problem with a clipped linear output $\max\{0,\min\{1,z\}\}$::Outside $[0,1]$ the gradient is zero, so gradient descent cannot learn
+
+Sigmoid and its derivative::$\sigma(z)=\dfrac{1}{1+e^{-z}}$, $\sigma'(z)=\sigma(z)(1-\sigma(z))$
+
+What is a logit?::The input $z=w^Tx+b$ to the sigmoid or softmax
+
+Why is squared error bad with a sigmoid output?::$dL/dz=(y-t)\sigma'(z)$ and $\sigma'(z)\approx0$ for confidently wrong predictions, so the step is tiny exactly when it should be large
+
+Binary cross-entropy::$L_{CE}=-t\log y-(1-t)\log(1-y)$
+
+Gradient of cross-entropy with respect to the logit::$\partial L_{CE}/\partial z=y-t$ (for sigmoid and for softmax)
+
+What is logistic regression in DL terms?::A linear layer, sigmoid output, cross-entropy loss
+
+Softmax::$y_k=\dfrac{e^{z_k}}{\sum_{k'}e^{z_{k'}}}$. Outputs are positive and sum to 1.
+
+Multiclass cross-entropy with one-hot target::$L_{CE}=-\sum_k t_k\log y_k=-t^T\log y$
+
+One-hot encoding::A target vector with a 1 at the true class and 0 elsewhere
+
+Output unit, distribution and loss for regression, binary, multiclass::Linear, Gaussian, squared error. Sigmoid, Bernoulli, binary cross-entropy. Softmax, categorical, cross-entropy.

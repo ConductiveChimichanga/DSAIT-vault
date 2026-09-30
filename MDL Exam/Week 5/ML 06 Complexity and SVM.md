@@ -105,3 +105,58 @@ A 3D inner product for the price of a 2D one.
 
 ## Books
 PRML 7.1 (maximum margin classifiers; 7.1.1 overlapping classes), 6.1–6.2 (dual representations, constructing kernels), Appendix E (Lagrange multipliers), 7.1.5 (computational learning theory, VC). DL book 5.7.2 (SVM), 5.2 (capacity, VC dimension).
+
+## Flashcards
+#flashcards/MDL/Week5
+
+What is the complexity of a classifier?::Its flexibility, the ability to fit any data distribution
+
+How should you choose complexity?::According to the available training set size. Complex needs lots of data, simple for small sets.
+
+Regularised covariance::$\Sigma\leftarrow\Sigma+\lambda I$, which makes the inverse exist
+
+QDA with $\lambda\to\infty$ and equal priors::The nearest mean classifier
+
+General regularised objective::$\varepsilon_A(\theta)+\lambda\,\Omega(\theta)$, training error plus a penalty on flexibility
+
+Why is the number of parameters a poor complexity measure?::$\operatorname{sign}(\sin(\omega x))$ has one parameter but can separate almost any labelling
+
+VC dimension::The largest number of points $h$ that the classifier can shatter, i.e. realise every possible labelling
+
+VC dimension of a linear classifier in $p$ dimensions::$h=p+1$
+
+What does a small VC dimension give you?::A true error close to the apparent error (tight bound)
+
+Why is the VC bound not practical?::It is very loose, it assumes the worst case of randomly labelled objects
+
+Canonical hyperplane constraints::$y_i(w^Tx_i+b)\ge1$ for all training objects
+
+VC bound for a canonical hyperplane::$h\le\min(\lceil R^2/\rho^2\rceil,\,p)+1$, so a larger margin $\rho$ gives a smaller $h$
+
+Margin width of an SVM::$2/\lVert w\rVert$
+
+Hard-margin SVM problem::$\min\tfrac12\lVert w\rVert^2$ subject to $y_i(w^Tx_i+b)\ge1$
+
+SVM weight vector from the dual::$w=\sum_i\alpha_iy_ix_i$, with $\alpha_i\ge0$ and $\sum_i\alpha_iy_i=0$
+
+What are support vectors?::The training objects with $\alpha_i>0$. They lie on the margin and alone determine the classifier.
+
+Leave-one-out bound for the SVM::$\varepsilon_{LOO}\le\dfrac{\#\text{support vectors}}{N}$
+
+Soft-margin SVM::$\min\tfrac12\lVert w\rVert^2+C\sum_i\xi_i$ subject to $y_i(w^Tx_i+b)\ge1-\xi_i$, $\xi_i\ge0$
+
+Role of $C$::Trades training errors against margin width. Large $C$, few violations and narrow margin. Small $C$, wide margin. Set by cross-validation.
+
+What is the kernel trick?::Replace every inner product $x_i^Tx_j$ by a kernel $K(x_i,x_j)=\Phi(x_i)^T\Phi(x_j)$, without ever computing $\Phi$
+
+Kernelised SVM classifier::$f(z)=\sum_i\alpha_iy_iK(x_i,z)+b$
+
+Polynomial and RBF kernel::$(x^Ty+1)^d$ and $\exp(-\lVert x-y\rVert^2/\sigma^2)$
+
+Kernel for $\Phi(x)=(x_1^2,x_2^2,\sqrt2x_1x_2)$::$K(x,y)=(x^Ty)^2$
+
+Why does the SVM work well in high dimensions?::The solution depends on (few) objects, not on the features, and no density is estimated
+
+Three disadvantages of the SVM::Expensive quadratic optimisation, kernel and $C$ must be tuned, trouble with heavily overlapping classes
+
+Why can an SVM be faster than Parzen at test time?::It evaluates kernels only on the support vectors, Parzen on all training objects

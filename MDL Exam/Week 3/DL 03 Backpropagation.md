@@ -109,3 +109,42 @@ Each layer caches its forward input, because the backward pass needs it.
 
 ## Books
 DL book 6.5 (back-propagation; 6.5.1 computational graphs, Algorithms 6.1 and 6.2), 4.3. UDL 7 (gradients and initialisation). PRML 5.3 (error backpropagation). D2L 5.3.
+
+## Flashcards
+#flashcards/MDL/Week3
+
+Backpropagation vs gradient descent::Backprop computes the gradient efficiently. Gradient descent uses the gradient to update the parameters.
+
+What is backprop in one sentence?::The chain rule applied backwards through the computational graph, re-using shared intermediate derivatives
+
+Chain rule (Leibniz)::$\dfrac{dz}{dx}=\dfrac{dz}{dy}\dfrac{dy}{dx}$
+
+Multivariate chain rule::$\dfrac{d}{dt}f(x(t),y(t))=\dfrac{\partial f}{\partial x}\dfrac{dx}{dt}+\dfrac{\partial f}{\partial y}\dfrac{dy}{dt}$, sum over all paths
+
+Bar notation::$\bar v=\dfrac{dL}{dv}$, the computed derivative of the loss with respect to $v$
+
+Bar equations for $z=wx+b$, $y=\sigma(z)$, $L=\tfrac12(y-t)^2$::$\bar y=y-t$, $\bar z=\bar y\,\sigma'(z)$, $\bar w=\bar z\,x$, $\bar b=\bar z$
+
+Disadvantage of differentiating each parameter separately::Redundant computation, shared factors are recomputed for every parameter
+
+What does the forward pass compute?::All node values in topological order, ending with the loss
+
+What does the backward pass compute?::All bar values in reverse topological order, starting from $\bar L=1$
+
+Backprop rule for a node::$\bar n_i=\sum_{n_j\in\text{Children}(n_i)}\bar n_j\,\dfrac{\partial n_j}{\partial n_i}$
+
+What is a topological ordering?::An ordering of the nodes such that for every edge $u\to v$, $u$ comes before $v$
+
+Why does the backward pass start with $\bar n_N=1$?::The derivative of a node with respect to itself is 1
+
+$\bar w$ for $L_{reg}=L+\lambda R$ with $R=\tfrac12w^2$::$\bar w=\bar z\,x+\bar R\,w$ with $\bar R=\lambda$. Two children, so two terms.
+
+Slide example, $x=2,w=3,b=4,t=5$, ReLU. Forward values?::$z=10$, $y=10$, $L=12.5$
+
+Same example, backward values and update with $\epsilon=0.1$?::$\bar y=5,\bar z=5,\bar w=10,\bar b=5$; $w=2$, $b=3.5$; the new loss is $3.125$
+
+Backward pass of a linear layer $y=xW+b$::$\bar W=x^T\bar y$, $\bar b=\sum\bar y$ over the batch, $\bar x=\bar y\,W^T$
+
+Backward pass of ReLU and sigmoid::ReLU, $\bar z=\bar y\odot\mathbb 1[z>0]$. Sigmoid, $\bar z=\bar y\odot y(1-y)$.
+
+Upstream, local and downstream gradient::Downstream = upstream ($\partial L/\partial y$) times local ($\partial y/\partial x$)

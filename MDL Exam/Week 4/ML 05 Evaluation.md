@@ -100,3 +100,50 @@ Sweep the decision threshold $d$ in $S(x)-d=0$ and plot the two class errors aga
 
 ## Books
 PRML 1.3 (model selection, cross-validation), 1.5.3 (reject option), 1.5.1. DL book 5.3 (validation sets, cross-validation), 11.1 (performance metrics, precision/recall).
+
+## Flashcards
+#flashcards/MDL/Week4
+
+Apparent error vs true error::Apparent, error on the training set (optimistically biased). True, error on the unseen distribution.
+
+What is a surrogate loss?::A convenient loss optimised instead of the classification error, which cannot be optimised directly
+
+What do LDA, QDA, nearest mean and logistic optimise?::Maximum likelihood
+
+Large training set vs large test set::Large training set gives a good classifier. Large test set gives a reliable error estimate.
+
+Error estimate from a small independent test set::Unbiased but unreliable (large variance)
+
+n-fold cross-validation::Split the data in $n$ parts, train on $n-1$, test on the rest, rotate $n$ times, average the errors
+
+Leave-one-out::Cross-validation with $n=N$. Nearly unbiased, but expensive and high variance.
+
+What is a learning curve?::Error (train and test) plotted against training set size
+
+Learning curve behaviour::True error decreases, apparent error increases, both converge to the asymptotic error
+
+Complex vs simple classifier on a learning curve::Complex has lower training error, higher test error for small sets and lower asymptotic error, so the curves cross
+
+What is a feature curve?::Error against number of features or complexity at a fixed training set size; the true error is U-shaped
+
+Confusion matrix entry $c_{ij}$::Number of objects of true class $i$ classified as class $j$
+
+Recall (sensitivity)::$\dfrac{TP}{TP+FN}$, the fraction of the target class that is found
+
+Precision::$\dfrac{TP}{TP+FP}$, the fraction of objects assigned to the class that really belong to it
+
+Specificity::$\dfrac{TN}{TN+FP}$, the performance on objects outside the target class
+
+Ambiguity reject vs outlier reject::Ambiguity, reject objects near the boundary (equal posteriors). Outlier, reject objects far from all training data.
+
+What is a reject curve?::Error $\varepsilon_r$ against rejected fraction $r$. Rejecting lowers the error but has its own cost.
+
+How is an ROC curve made?::Vary the classifier threshold and plot true positive rate against false positive rate (or the two class errors)
+
+When is ROC analysis useful?::When priors or costs are unknown or changing, and to compare or combine classifiers
+
+AUC values::1.0 for a perfect classifier, 0.5 for random. Insensitive to class priors.
+
+Standard deviation of a test error estimate::About $\sqrt{\varepsilon(1-\varepsilon)/N_{test}}$
+
+Three sources of variation in a measured error::The training set drawn, the test set drawn, randomness in the training algorithm

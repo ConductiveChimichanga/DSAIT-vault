@@ -98,3 +98,46 @@ Batch normalisation (effect on complexity unclear), soft targets, student-teache
 
 ## Books
 DL book 7 (7.1 norm penalties, 7.4 augmentation, 7.5 noise, 7.8 early stopping, 7.9 parameter sharing, 7.12 dropout, 7.13 adversarial training), 5.2 (capacity, over/underfitting). PRML 3.1.4 (regularised least squares), 5.5 (regularisation in neural networks). UDL 9.
+
+## Flashcards
+#flashcards/MDL/Week5
+
+Goodfellow's definition of regularisation::Techniques to reduce the test error, possibly at the expense of increased training error
+
+How do you detect overfitting?::A large gap between the apparent (training) error and the true (test) error on the learning curve
+
+Three general remedies for overfitting::More data or data augmentation, fewer features, a less flexible model
+
+What is dataset augmentation and when can you use it?::Create extra training data with label-preserving transformations. Only possible when you know the invariances.
+
+Adversarial example::$x+\epsilon\operatorname{sign}(\nabla_xJ(\theta,x,y))$, an imperceptible change that is misclassified with high confidence
+
+Regularised objective::$\tilde J(\theta)=J(\theta)+\alpha\,\Omega(\theta)$
+
+L2 penalty and its gradient::$\tilde J=\frac\alpha2w^Tw+J$, $\nabla_w\tilde J=\alpha w+\nabla_wJ$
+
+L2 update as weight decay::$w\leftarrow(1-\epsilon\alpha)w-\epsilon\nabla_wJ$
+
+Other names for L2 regularisation::Weight decay, ridge regression, Tikhonov regularisation
+
+L1 penalty and its gradient::$\tilde J=\alpha\lVert w\rVert_1+J$, $\nabla_w\tilde J=\alpha\operatorname{sign}(w)+\nabla_wJ$
+
+Key difference between L1 and L2::L1 drives weights to exactly zero (sparse, feature selection). L2 shrinks all weights but not to zero.
+
+What is early stopping?::Stop training when the validation loss starts to rise
+
+Why does early stopping regularise?::Starting from small weights, the weights have no time to grow large, similar to L2
+
+What does early stopping need to work?::Good initialisation with small weights, so the initial network is almost linear
+
+Noise on inputs, weights, outputs corresponds to::Data augmentation; weight norm regularisation (for tiny variance); label smoothing
+
+Parameter sharing::Forcing weights to be equal, as in convolutions. A huge reduction in the number of weights.
+
+Dropout during training::At each step randomly set a fraction of the nodes to 0 and backprop through the remaining network
+
+Dropout at test time::Keep all nodes and scale weights by the keep probability, $w_{new}=p\,w_{org}$ (or average several sub-networks)
+
+Do you need regularisation with infinite training data?::No, the training error then equals the true error
+
+Why should you avoid looking at the test set repeatedly?::Each look influences your hyperparameter choices, so you overfit to the test set yourself

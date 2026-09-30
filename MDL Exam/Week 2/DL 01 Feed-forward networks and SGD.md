@@ -96,3 +96,42 @@ Better update rules built on this are in [[DL 04 Optimisers]]; how the gradient 
 
 ## Books
 DL book 6 and 6.1 (feed-forward nets, XOR), 4.3 (gradient-based optimisation), 5.9 (SGD). UDL 3, 4 (shallow and deep networks), 6.2 (SGD). PRML 5.1. D2L chapter 5 (multilayer perceptrons).
+
+## Flashcards
+#flashcards/MDL/Week2
+
+What does a feed-forward network do?::Approximates a target function $f^*$ with a parameterised chain of functions $y=f(x;\theta)$ and learns $\theta$
+
+One-hidden-layer network with ReLU::$f(x)=w^T\max\{0,\,W^Tx+c\}+b$
+
+How many parameters does a fully connected layer have?::$n_{in}\cdot n_{out}$ weights plus $n_{out}$ biases
+
+Parameters of a 2-2-1 network::$2\cdot2+2+2\cdot1+1=9$
+
+Why do stacked linear layers need a nonlinearity?::$w^T(W^Tx)$ is again one linear map, so without an activation depth adds nothing
+
+ReLU::$g(z)=\max\{0,z\}$, applied element-wise
+
+Three ways to get a nonlinear representation $\phi(x)$::A generic kernel (RBF), hand-designed features (SIFT), or learning $\phi$. Learning it is deep learning.
+
+Why can a linear model not solve XOR?::The classes are not linearly separable. The best least-squares fit is $w=0$, $b=\tfrac12$, output ½ everywhere.
+
+XOR solution weights::$W=\begin{pmatrix}1&1\\1&1\end{pmatrix}$, $c=(0,-1)^T$, $w=(1,-2)^T$, $b=0$
+
+What does the hidden layer do in the XOR solution?::It maps $(0,1)$ and $(1,0)$ to the same point $h=(1,0)$, making the classes linearly separable in $h$-space
+
+The three steps of the training loop::Present a sample (forward pass), compare the result with the label (loss), update the parameters (gradient step)
+
+What does the derivative tell you?::$f(w+\epsilon)\approx f(w)+\epsilon f'(w)$, how the output changes for a small change of the input
+
+What is the gradient $\nabla_\theta L$?::The vector of all partial derivatives of the loss with respect to the parameters
+
+Gradient descent update::$\theta^*=\theta-\epsilon\,\nabla_\theta L(X,y;\theta)$ with learning rate $\epsilon$
+
+Mean squared error loss::$L=\frac1n\sum_i\big(f(x^{(i)};\theta)-y^{(i)}\big)^2$
+
+SGD update::$\theta^*=\theta-\epsilon\,\frac1k\sum_{i=1}^k\nabla_\theta L(x^{(i)},y^{(i)},\theta)$ over a mini-batch of $k$ samples
+
+Why SGD instead of the full-batch gradient?::With huge datasets one full gradient takes too long; a mini-batch gives a cheap estimate of it
+
+Depth of a network::The number of layers (functions) in the chain

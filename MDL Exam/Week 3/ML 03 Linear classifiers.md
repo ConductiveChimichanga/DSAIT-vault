@@ -85,3 +85,48 @@ Derivation trick: add and subtract $E_D[g(x;D)]$, expand the square, the cross t
 
 ## Books
 PRML 4.1 (4.1.1 two classes, 4.1.3 least squares, 4.1.4 Fisher, 4.1.7 perceptron), 4.3.2 (logistic regression), 3.2 (bias-variance), 3.1.1 (least-squares normal equations). DL book 5.4 (bias and variance), 5.7.1.
+
+## Flashcards
+#flashcards/MDL/Week3
+
+Linear discriminant::$g(x)=w^Tx+w_0$, assign $y_1$ if $g(x)\ge0$
+
+Geometric meaning of $w$ and $w_0$::$w$ is perpendicular to the decision boundary; $w_0$ shifts the boundary away from the origin
+
+How do you absorb the bias into the weight vector?::Homogeneous coordinates, append a 1 to $x$ so $g(x)=\tilde w^T\tilde x$
+
+Two ways to minimise a cost $J(\theta)$::Set the derivative to zero and solve, or follow the gradient $\theta_{t+1}=\theta_t-\rho\,\partial J/\partial\theta$
+
+Perceptron loss::$J(w)=\sum_{\text{misclassified }x_i}-y_i\,w^Tx_i$
+
+Perceptron update::$w\leftarrow w+\rho\sum_{\text{misclassified }x_i}y_i\,x_i$
+
+Perceptron behaviour on separable vs non-separable data::Separable, it converges to some separating boundary. Non-separable, it keeps updating forever.
+
+Fisher criterion::$J_F=\dfrac{\lvert w^T\mu_A-w^T\mu_B\rvert^2}{w^T\Sigma_Aw+w^T\Sigma_Bw}$, between-class over within-class scatter along $w$
+
+Fisher solution::$w=\Sigma_W^{-1}(\mu_A-\mu_B)$ with $\Sigma_W=\Sigma_A+\Sigma_B$
+
+Fisher vs LDA::Same direction $w$. LDA assumes Gaussian classes with equal covariance; Fisher only optimises the criterion and leaves $w_0$ free.
+
+Least-squares solution::$\hat w=(X^TX)^{-1}X^Ty$
+
+Gradient of $\lVert Xw-y\rVert^2$::$2X^T(Xw-y)$; setting it to zero gives the normal equations $X^TXw=X^Ty$
+
+When is $X^TX$ invertible?::When the columns of $X$ are linearly independent, which needs $N\ge d$ and data spanning all $d$ directions
+
+Logistic model assumption::The log-odds are linear, $\ln\dfrac{p(y_1\mid x)}{p(y_2\mid x)}=\beta_0+\beta^Tx$
+
+Logistic posterior::$p(y_1\mid x)=\dfrac{1}{1+\exp(-(\beta_0+\beta^Tx))}$
+
+How is the logistic classifier trained?::Maximise the log-likelihood by gradient ascent, $\beta\leftarrow\beta+\eta\,\partial\ln L/\partial\beta$, starting from $\beta=0$
+
+Bias-variance decomposition::$E_D[(g-E[y\mid x])^2]=E_D[(g-E_D[g])^2]+(E_D[g]-E[y\mid x])^2$, variance plus bias squared
+
+Define variance and bias of a classifier::Variance, how much the classifier changes across training sets. Bias, how far the average classifier is from the true output.
+
+Bias and variance of LDA vs k-NN::LDA has low variance and high bias. k-NN has high variance and low bias.
+
+Shape of the feature curve::Apparent error keeps dropping with complexity; true error is U-shaped. The minimum moves right with more training data.
+
+Which loss does each linear classifier use?::Perceptron, misclassified margins. Least squares, squared error. Logistic and LDA, likelihood. Fisher, scatter ratio.

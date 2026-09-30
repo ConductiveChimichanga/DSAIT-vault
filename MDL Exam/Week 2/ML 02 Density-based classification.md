@@ -102,3 +102,58 @@ The number of examples needed can grow **exponentially** with the number of feat
 
 ## Books
 PRML 2.3 (Gaussian; 2.3.4 ML estimates), 4.2 (probabilistic generative models, LDA/QDA), 2.5 (2.5.1 kernel density, 2.5.2 nearest neighbours), 1.4 (curse of dimensionality).
+
+## Flashcards
+#flashcards/MDL/Week2
+
+What is a plug-in Bayes classifier?::Estimate $\hat p(x\mid y)$ and $\hat p(y)$ from training data and plug them into Bayes' rule
+
+Usual estimate of the class prior::$\hat p(y)=N_y/N$
+
+Multivariate Gaussian density::$p(x)=\dfrac{1}{\sqrt{(2\pi)^p\det\Sigma}}\exp\big(-\tfrac12(x-\mu)^T\Sigma^{-1}(x-\mu)\big)$
+
+ML estimate of the mean and covariance::$\hat\mu=\frac1N\sum_i x_i$, $\hat\Sigma=\frac1N\sum_i(x_i-\hat\mu)(x_i-\hat\mu)^T$
+
+Gaussian discriminant $g_i(x)$::$-\tfrac12\log\det\Sigma_i-\tfrac12(x-\mu_i)^T\Sigma_i^{-1}(x-\mu_i)+\log p(y_i)$
+
+QDA assumption and boundary shape::Each class has its own covariance $\Sigma_i$; the boundary is quadratic, $x^TWx+w^Tx+w_0=0$
+
+LDA assumption and boundary shape::All classes share one (averaged) covariance; the quadratic terms cancel and the boundary is linear
+
+LDA weight vector::$w=\hat\Sigma^{-1}(\hat\mu_1-\hat\mu_2)$
+
+Nearest mean classifier assumption::$\Sigma=\sigma^2I$ (equal variance, uncorrelated features). $w=\hat\mu_1-\hat\mu_2$, only distances to the class means matter.
+
+Order QDA, LDA, nearest mean by number of parameters::QDA most, LDA fewer, nearest mean fewest. Fewer parameters means less data needed but more bias.
+
+When is the estimated covariance matrix not invertible?::Too few objects relative to the dimensionality, or no variation in some direction (a variance of 0)
+
+Three fixes for a singular covariance::Average covariances over classes (LDA), assume $\sigma^2I$ (nearest mean), or regularise $\Sigma+\lambda I$
+
+Histogram density estimate::$\hat p(x)=\dfrac{k_N}{N\,h}$ with $k_N$ points in the bin of width $h$
+
+Parzen density estimate::$\hat p(z)=\frac1n\sum_i K(\lVert z-x_i\rVert,h)$. Fixed kernel width $h$ on every training point.
+
+k-NN density estimate::$\hat p(x)=\dfrac{k}{n\,V_k}$. Fixed count $k$, the volume $V_k$ grows until it holds $k$ points.
+
+Parzen vs k-NN in one line::Parzen fixes the volume and counts points; k-NN fixes the count and measures the volume
+
+Why is k-NN classification a majority vote?::$\hat p(x\mid y_m)\hat p(y_m)=\frac{k_m}{n_mV_k}\frac{n_m}{n}=\frac{k_m}{nV_k}$, so the largest posterior is the largest $k_m$
+
+Effect of small vs large $k$ (or $h$)::Small gives a ragged boundary, high variance, overfitting. Large gives a smooth boundary, high bias.
+
+k-NN error as $k\to N$::$\min(p(y_1),p(y_2))$, everything is assigned to the largest class
+
+Why must features be scaled for Parzen and k-NN?::They use distances, which are dominated by the feature with the largest range
+
+What is the curse of dimensionality?::The number of training examples needed can grow exponentially with the number of features
+
+Histogram argument for the curse of dimensionality::10 bins per feature gives $10^p$ cells, e.g. $10^{50}$ in 50 dimensions
+
+Sphere argument for the curse of dimensionality::$\mathrm{Vol}(0.9r)/\mathrm{Vol}(r)=0.9^p\to0$, so in high dimensions almost all data is in the outer rim
+
+Generative vs discriminative classifier::Generative models $p(x\mid y)p(y)$ and uses Bayes. Discriminative models $p(y\mid x)=f(x;w)$ or the boundary directly.
+
+Two advantages of generative classifiers::You get posteriors and the full data density (outlier detection); parameters are easy to estimate by maximum likelihood
+
+Two disadvantages of discriminative classifiers::You must choose a loss and the optimisation can be hard; the output score is not interpretable and outlier rejection is not obvious

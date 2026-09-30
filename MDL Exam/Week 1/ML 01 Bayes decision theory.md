@@ -19,6 +19,7 @@ flowchart LR
     T["Independent test data"] --> E["Evaluation"]
     C --> E
 ```
+
 - **Labels need experts.** Ask where the label comes from (the image itself or an external source), what the ground truth is, and whether the measurements even contain the information needed.
 - **Good features**: classes are clearly different, confusion comes only from measurement noise. **Poor features**: even experts are unsure (healthy vs diseased) and it is unclear what to measure.
 - **Always check on independent test data.** Judging on the examples you trained on is overfitting to the training data.
@@ -81,3 +82,42 @@ Worked versions of Assignment 1 are in [[MDL Practice questions]].
 
 ## Books
 PRML 1.5 (decision theory: 1.5.1 misclassification rate, 1.5.2 expected loss, 1.5.3 reject option), 1.2 (probability refresher). DL book 3 (probability), 5.1 (learning algorithms).
+
+## Flashcards
+#flashcards/MDL/Week1
+
+Bayes' theorem for the class posterior::$p(y\mid x)=\dfrac{p(x\mid y)\,p(y)}{p(x)}$
+
+How do you get $p(x)$ without estimating it separately?::Law of total probability, $p(x)=\sum_i p(x\mid y_i)\,p(y_i)$
+
+Name the three ingredients of Bayes' rule for classification::Class-conditional density $p(x\mid y)$, class prior $p(y)$, unconditional data density $p(x)$
+
+What is the Bayes classifier?::Assign $x$ to the class with the largest posterior $p(y\mid x)$, using the true distributions. It is the best possible classifier.
+
+What is the decision boundary between two classes?::The points where $p(y_1\mid x)=p(y_2\mid x)$
+
+Give the four equivalent forms of the two-class decision rule::$p_1>p_2$; $p_1-p_2>0$; $p_1/p_2>1$; $\log p_1-\log p_2>0$ (with $p_i=p(y_i\mid x)$)
+
+What is the Bayes error?::The minimum attainable error, $\int\min[p(x\mid y_1)p(y_1),\,p(x\mid y_2)p(y_2)]\,dx$. Typically greater than 0.
+
+What does the Bayes error depend on?::Only on the distribution of the data (class overlap), not on the classification rule
+
+Why can you usually not compute the Bayes error?::The true class-conditional densities are unknown and the integrals are high-dimensional
+
+True or false, better posterior estimates reduce the Bayes error::False. They bring your classifier closer to the Bayes error, which itself is fixed by the data.
+
+What does $\lambda_{ji}$ mean?::The cost of assigning an object that came from class $j$ to class $i$
+
+Conditional risk of assigning $x$ to class $i$::$l_i(x)=\sum_j\lambda_{ji}\,p(y_j\mid x)$
+
+Two-class minimum-risk rule (zero cost for correct decisions)::Assign $y_1$ if $\lambda_{12}\,p(y_1\mid x)>\lambda_{21}\,p(y_2\mid x)$
+
+What do misclassification costs do to the Bayes classifier?::They only rescale the posteriors. The boundary moves away from the class that is expensive to miss.
+
+What happens to the boundary when the prior of class 1 increases?::It shifts toward class 2, so class 1 gets a larger region
+
+Classification vs regression vs clustering::Class labels; real-valued outputs; no labels (unsupervised)
+
+Steps of the pattern recognition pipeline::Measurements, feature extraction, labeled dataset, learning, classifier, then evaluation on independent test data
+
+Why evaluate on independent test data?::The error on the training data is optimistically biased (you overfit to your training data)

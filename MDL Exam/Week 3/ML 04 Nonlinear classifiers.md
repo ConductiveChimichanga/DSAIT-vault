@@ -98,3 +98,44 @@ Feed the outputs (posteriors) of several base classifiers into a combiner.
 
 ## Books
 PRML 14 (14.2 bagging and committees, 14.3 boosting / AdaBoost, 14.4 tree-based models), 3.1 (basis functions). DL book 7.11 (bagging).
+
+## Flashcards
+#flashcards/MDL/Week3
+
+How do nonlinear features make a linear classifier nonlinear?::Add terms like $x_1^2$, $x_1x_2$; the model stays linear in $w$ but the boundary is nonlinear in $x$
+
+Drawback of adding polynomial features::The number of terms explodes with degree and dimension, so it overfits
+
+What does a decision tree node do?::Tests one feature against a threshold and branches; a leaf outputs a class
+
+Entropy impurity::$Q=-\sum_i p_i\log p_i$ with $p_i=p(y_i\mid\text{node})$
+
+Gini impurity::$Q=\sum_i p_i(1-p_i)$
+
+What is a decision stump?::A tree with a single split. The only model for which the classification error can be minimised directly.
+
+When do you stop splitting a tree?::Impurity no longer improves, the node is pure enough, or maximum depth is reached
+
+Main weakness of decision trees::Instability, removing one training object can change the whole tree
+
+What is bagging?::Bootstrap aggregating. Train $M$ classifiers on bootstrap samples (drawn with replacement) and average, $\hat y_{bag}=\frac1M\sum_m\hat y_m$
+
+Error reduction of bagging under uncorrelated errors::$E_{bag}=\frac1M E_{AV}$
+
+What is a random forest?::Bagged decision trees plus a random subset of features (possibly per node)
+
+Why does averaging identical trees not help?::The same data gives exactly the same tree, so randomness must be injected
+
+What is boosting?::A weighted sum of weak classifiers trained sequentially, each focusing on the objects the previous ones got wrong
+
+AdaBoost classifier weight::$\alpha_m=\tfrac12\log\dfrac{1-\varepsilon_m}{\varepsilon_m}$
+
+AdaBoost reweighting step::Multiply the weights of misclassified objects by $\exp(\alpha_m)$
+
+AdaBoost final classifier::$\operatorname{sign}\big(\sum_m\alpha_m\hat y_m(x)\big)$
+
+Bagging vs boosting::Bagging, independent models, plain average, reduces variance. Boosting, sequential models, weighted sum, reduces bias.
+
+When does combining classifiers help?::When the base classifiers are diverse. Similar classifiers add nothing.
+
+What is a trained combiner of perceptrons?::A neural network, trained with error backpropagation
