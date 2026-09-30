@@ -1,6 +1,6 @@
 ---
 tags: [MDL, ML, exam]
-week: 3
+week: 2
 slides: "week3a_LinearClassifiers"
 lecturer: "David Tax"
 lab: "Assignment 4"
@@ -90,7 +90,7 @@ Derivation trick: add and subtract $E_D[g(x;D)]$, expand the square, the cross t
 PRML 4.1 (4.1.1 two classes, 4.1.3 least squares, 4.1.4 Fisher, 4.1.7 perceptron), 4.3.2 ([[Logistic regression|logistic regression]]), 3.2 (bias-variance), 3.1.1 (least-squares normal equations). DL book 5.4 (bias and variance), 5.7.1.
 
 ## Flashcards
-#flashcards/MDL/Week3
+#flashcards/MDL/Week2
 
 Linear discriminant::$g(x)=w^Tx+w_0$, assign $y_1$ if $g(x)\ge0$
 

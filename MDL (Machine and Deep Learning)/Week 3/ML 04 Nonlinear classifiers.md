@@ -6,7 +6,7 @@ lecturer: "David Tax"
 ---
 # ML 04 · Nonlinear classifiers
 
-[[ML 03 Linear classifiers|← ML 03]] · [[00 MDL Index|↑ Index]] · [[ML 05 Evaluation|ML 05 →]]
+[[ML 03 Linear classifiers|← ML 03]] · [[00 MDL Index|↑ Index]] · [[DL 02 Loss functions and maximum likelihood|DL 02 →]]
 
 ## Big picture
 Most nonlinear classifiers are built by **combining simple (often linear) pieces**. They need enough data; with little data keep the model simple or regularise.

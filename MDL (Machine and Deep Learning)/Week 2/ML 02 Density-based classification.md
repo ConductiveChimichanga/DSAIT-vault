@@ -7,7 +7,7 @@ lab: "Assignment 1"
 ---
 # ML 02 · Density-based classification
 
-[[ML 01 Bayes decision theory|← ML 01]] · [[00 MDL Index|↑ Index]] · [[ML 03 Linear classifiers|ML 03 →]]
+[[DL 01 Feed-forward networks and SGD|← DL 01]] · [[00 MDL Index|↑ Index]] · [[ML 03 Linear classifiers|ML 03 →]]
 
 ## Big picture
 "[[Plug-in Bayes classifier|Plug-in Bayes]]": estimate $\hat p(x\mid y)$ and $\hat p(y)$ from training data, plug them into [[Bayes' theorem|Bayes' rule]]. The only real choice is the **model for the [[Class-conditional density|class-conditional density]]**: a Gaussian (parametric) or a sum of local bumps (non-parametric).

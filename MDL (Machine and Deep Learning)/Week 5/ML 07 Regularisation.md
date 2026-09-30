@@ -7,7 +7,7 @@ follows: "Deep Learning book, chapter 7"
 ---
 # ML 07 · Regularisation
 
-[[ML 06 Complexity and SVM|← ML 06]] · [[00 MDL Index|↑ Index]] · [[DL 01 Feed-forward networks and SGD|DL 01 →]]
+[[ML 06 Complexity and SVM|← ML 06]] · [[00 MDL Index|↑ Index]]
 
 ## Big picture
 Modern practice: build a very large flexible model, then use tricks to stop it [[Overfitting|overfitting]]. Those tricks are [[Regularisation|regularisation]].

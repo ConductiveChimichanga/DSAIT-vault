@@ -6,7 +6,7 @@ lab: "Assignment 6"
 ---
 # ML 05 · Classifier evaluation
 
-[[ML 04 Nonlinear classifiers|← ML 04]] · [[00 MDL Index|↑ Index]] · [[ML 06 Complexity and SVM|ML 06 →]]
+[[DL 04 Optimisers|← DL 04]] · [[00 MDL Index|↑ Index]] · [[ML 06 Complexity and SVM|ML 06 →]]
 
 ## Big picture
 The error on the training set is **not** a good measure of the [[True error and apparent error|true error]], and a single number is not all we want. This lecture is about estimating performance honestly and reading the curves that diagnose a classifier.

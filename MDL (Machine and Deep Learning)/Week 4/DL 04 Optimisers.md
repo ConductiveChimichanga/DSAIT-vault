@@ -6,7 +6,7 @@ lab: "Assignment 5"
 ---
 # DL 04 · Optimisers: momentum, RMSProp, Adam
 
-[[DL 03 Backpropagation|← DL 03]] · [[00 MDL Index|↑ Index]]
+[[DL 03 Backpropagation|← DL 03]] · [[00 MDL Index|↑ Index]] · [[ML 05 Evaluation|ML 05 →]]
 
 > [!warning]- Source: Assignment 5 only
 > I have no lecture slides for the Optimization lecture, so treat this as a core summary and check it against the slides.

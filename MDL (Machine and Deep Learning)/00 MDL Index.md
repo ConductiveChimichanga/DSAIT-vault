@@ -9,24 +9,24 @@ Each lecture note has the same layout: **big picture, definitions, formulas, int
 
 ## Notes by week
 
-Week numbers come from the slide file names. Week 4 for the optimisers is inferred from the course schedule ("Optimization and Evaluation"); the DL decks are dated 3 and 17 Sept.
+Weeks follow the official course schedule.
 
-| Week | Note | Source slides | Lab |
-|---|------|---------------|-----|
-| 1 | [[ML 01 Bayes decision theory]] | week1a_introduction | Assignment 1 |
-| 2 | [[ML 02 Density-based classification]] | week2a_classification | Assignment 1 |
-| 2 | [[DL 01 Feed-forward networks and SGD]] | MDL02.2.feedforward | Assignment 2 |
-| 3 | [[ML 03 Linear classifiers]] | week3a_LinearClassifiers | Assignment 4 |
-| 3 | [[ML 04 Nonlinear classifiers]] | week3a_NonLinearClassifiers | |
-| 3 | [[DL 02 Loss functions and maximum likelihood]] | MDL03b.1.loss | Assignment 3 |
-| 3 | [[DL 03 Backpropagation]] | MDL03b.2.backprop | Assignment 3 |
-| 4 | [[ML 05 Evaluation]] | week4b_evaluation | Assignment 6 |
-| 4 | [[DL 04 Optimisers]] | no slides yet, from Assignment 5 | Assignment 5 |
-| 5 | [[ML 06 Complexity and SVM]] | week5a_Complexity | Assignment 7 |
-| 5 | [[ML 07 Regularisation]] | week5b_Regularisation | |
-| 6 | CNNs and recurrent networks | not received | |
-| 7 | Self-attention and unsupervised learning | not received | |
-| 8 | Foundation models and Q&A | not received | |
+| Week | Theme | Note | Source slides | Lab |
+|---|---|------|---------------|-----|
+| 1 | Introduction | [[ML 01 Bayes decision theory]] | week1a_introduction | Assignment 1 |
+| 1 | Introduction | [[DL 01 Feed-forward networks and SGD]] | MDL02.2.feedforward | Assignment 2 |
+| 2 | Classification | [[ML 02 Density-based classification]] | week2a_classification | Assignment 1 |
+| 2 | Classification | [[ML 03 Linear classifiers]] | week3a_LinearClassifiers | Assignment 4 |
+| 3 | Discriminative classifiers | [[ML 04 Nonlinear classifiers]] | week3a_NonLinearClassifiers | |
+| 3 | Discriminative classifiers | [[DL 02 Loss functions and maximum likelihood]] | MDL03b.1.loss | Assignment 3 |
+| 3 | Discriminative classifiers | [[DL 03 Backpropagation]] | MDL03b.2.backprop | Assignment 3 |
+| 4 | Optimization and evaluation | [[DL 04 Optimisers]] | no slides yet, from Assignment 5 | Assignment 5 |
+| 4 | Optimization and evaluation | [[ML 05 Evaluation]] | week4b_evaluation | Assignment 6 |
+| 5 | Complexity and regularization | [[ML 06 Complexity and SVM]] | week5a_Complexity | Assignment 7 |
+| 5 | Complexity and regularization | [[ML 07 Regularisation]] | week5b_Regularisation | |
+| 6 | CNNs and recurrent networks | not received | | |
+| 7 | Self-attention and unsupervised learning | not received | | |
+| 8 | Foundation models and Q&A | not received | | |
 
 Across weeks: [[MDL Formula sheet]] · [[MDL Practice questions]] · [[MDL Concepts]] (one note per definition, linked from the lecture notes)
 

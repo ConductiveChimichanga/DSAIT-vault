@@ -8,7 +8,7 @@ handout: "MDL-Loss-RGrosse.pdf (Brightspace)"
 ---
 # DL 02 · Loss functions and maximum likelihood
 
-[[DL 01 Feed-forward networks and SGD|← DL 01]] · [[00 MDL Index|↑ Index]] · [[DL 03 Backpropagation|DL 03 →]]
+[[ML 04 Nonlinear classifiers|← ML 04]] · [[00 MDL Index|↑ Index]] · [[DL 03 Backpropagation|DL 03 →]]
 
 ## Big picture
 Where do loss functions come from? From **[[Maximum likelihood estimation|maximum likelihood]]**. Choosing the output unit (linear, [[Sigmoid|sigmoid]], [[Softmax|softmax]]) fixes the probability distribution the network predicts, and the negative log-likelihood of that distribution *is* the loss.

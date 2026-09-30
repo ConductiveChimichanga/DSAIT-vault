@@ -7,7 +7,7 @@ lab: "Assignment 1"
 ---
 # ML 01 · Introduction and Bayes decision theory
 
-[[00 MDL Index|↑ Index]] · [[ML 02 Density-based classification|ML 02 →]]
+[[00 MDL Index|↑ Index]] · [[DL 01 Feed-forward networks and SGD|DL 01 →]]
 
 ## Big picture
 Machine learning = **learning from examples**. Classification = predict the label of an object. The best possible classifier is the **[[Bayes classifier]]**: assign the class with the highest [[Posterior probability|posterior]] $p(y\mid x)$. Everything else in the ML half is a way of estimating or side-stepping $p(y\mid x)$. When [[Misclassification cost|misclassification costs]] differ, you only need to **rescale the posteriors**.
